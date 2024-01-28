@@ -63,7 +63,7 @@ $artists = $query->display("artists");
                         </div>
                     </div>
                 </div>
-                <div class="profile">
+                <div class="profile" id="edit_profile-section" title="edit_profile-content" onclick="openDiv(this)">
                     <img src="uploads/<?= $_SESSION['image'] ?>" alt="profile">
                 </div>
             </div>
@@ -184,7 +184,13 @@ $artists = $query->display("artists");
                         </tbody>
                     </table>
                 </div>
+                <div id="edit_profile-content" class="content-part" style="display: none;">
+                    <div class="content-header">
+                        <h1>Edit Profile</h1>
+                    </div>
+                </div>
             </div>
+
             <div class="bottombar">
                 <div class="music-player">
                     <audio id="audio" style="display: none;"></audio>
@@ -221,6 +227,7 @@ $artists = $query->display("artists");
             </div>
         </div>
     </div>
+    <!-- for the popup  -->
     <div class="popup" id="playlistMaker-popup">
         <div class="overlay"></div>
         <div class="content">

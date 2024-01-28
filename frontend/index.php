@@ -175,8 +175,8 @@ $artists = $query->display("artists");
                                 <th>Artist</th>
                                 <th>Genre</th>
                                 <th>Album</th>
-                                <th></th>
-                                <th></th>
+                                <th colspan="3"></th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -186,7 +186,7 @@ $artists = $query->display("artists");
                 </div>
                 <div id="edit_profile-content" class="content-part" style="display: none;">
                     <div class="content-header">
-                        <h1>Edit Profile</h1>
+                        <h1>Your Profile</h1>
                     </div>
                 </div>
             </div>

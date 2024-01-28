@@ -1,13 +1,14 @@
-<?php 
-    include('../backend/query.php');
-    $query= new dbQuery;
-    $query->sessionCheck();
-    $genres = $query->display("genres");
-    $artists = $query->display("artists");
+<?php
+include('../backend/query.php');
+$query = new dbQuery;
+$query->sessionCheck();
+$genres = $query->display("genres");
+$artists = $query->display("artists");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,43 +21,41 @@
     <script src="js/popup.js"></script>
     <title>MusicX</title>
 </head>
+
 <body>
     <div class="container">
         <div class="sidebar" id="sidebar">
             <div class="sidebar-contents">
                 <h1>MusicX</h1>
                 <div class="nav-sections">
-                    <div id="home-section" title="home-content" class="nav-section-members"><i
-                            class="fa-solid fa-house"></i>Home</div>
-                    <div id="search-section" class="nav-section-members" title="search-content"><i
-                            class="fa-solid fa-magnifying-glass"></i>Search</div>
+                    <div id="home-section" title="home-content" class="nav-section-members"><i class="fa-solid fa-house"></i><a href="#song_nav_header">Home</a></div>
+                    <div id="search-section" class="nav-section-members" title="search-content"><i class="fa-solid fa-magnifying-glass"></i>Search</div>
                 </div>
                 <div class="library-section">
                     <h2>Your Library</h2>
-                    <div id="your_songs-section" title="your_songs-content" class="nav-section-members"><i
-                            class="fa-solid fa-user"></i>Your Songs
+                    <div id="your_songs-section" title="your_songs-content" class="nav-section-members"><i class="fa-solid fa-user"></i>Your Songs
                     </div>
-                    <div id="liked-section" title="liked-content" class="nav-section-members"><i
-                            class="fa-solid fa-heart"></i>Liked Songs
+                    <div id="liked-section" title="liked-content" class="nav-section-members"><i class="fa-solid fa-heart"></i>Liked Songs
                     </div>
                     <div id="new-playlist" onclick="togglePopup(event)"><i class="fa-solid fa-square-plus"></i>New Playlist
                     </div>
                     <div id="playlistCollection">
-                    <!-- <div id="playlist1" title="playlist-content" class="nav-section-members playlist-members">Playlist1fsafsafasfasfasfsafasfasfasfsafas
+                        <!-- <div id="playlist1" title="playlist-content" class="nav-section-members playlist-members">Playlist1fsafsafasfasfasfsafasfasfasfsafas
                     </div> -->
                     </div>
                 </div>
             </div>
             <div class="logout-section">
-                <i class="fa-solid fa-right-from-bracket fa-fw"></i><a href="logout.php">Logout</a> 
+                <i class="fa-solid fa-right-from-bracket fa-fw"></i><a href="logout.php">Logout</a>
             </div>
         </div>
         <div class="contents">
             <div class="topbar">
                 <div class="top-right-bar">
                     <div style="display:flex;">
-                        <h2></h2><h2>&nbsp;<?=$_SESSION['first_name']?> </h2>
-                </div>
+                        <h2></h2>
+                        <h2>&nbsp;<?= $_SESSION['first_name'] ?> </h2>
+                    </div>
                     <div class="search-bar" id="search-bar" style="display: none;">
                         <input type="text" id="main-search-bar" placeholder="Enter a song to search">
                         <div>
@@ -64,22 +63,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="profile" >
-                    <img src="uploads/<?=$_SESSION['image']?>" alt="profile" >
+                <div class="profile">
+                    <img src="uploads/<?= $_SESSION['image'] ?>" alt="profile">
                 </div>
             </div>
             <div class="main-content" style="color:white;">
                 <div id="home-content" class="content-part">
+                    <section id="song_nav_header" style="width: 100%;"></section>
                     <h1>Genre</h1>
                     <div class="home-content-box genre-box" id="genre">
-                        <?php foreach($genres as $genre) :?>
-                        <div class="box-content"><a href="#song_nav"><?php echo $genre['Genre_Name'];?></a></div>
+                        <?php foreach ($genres as $genre) : ?>
+                            <div class="box-content"><a href="#song_nav"><?php echo $genre['Genre_Name']; ?></a></div>
                         <?php endforeach; ?>
                     </div>
                     <h1 style="margin-top: 1rem;">Artist</h1>
                     <div class="home-content-box artist-box" id="genre">
-                    <?php foreach($artists as $artist) :?>
-                        <div class="box-content"><a href="#song_nav"><?php echo $artist['Artist_Name'];?></a></div>
+                        <?php foreach ($artists as $artist) : ?>
+                            <div class="box-content"><a href="#song_nav"><?php echo $artist['Artist_Name']; ?></a></div>
                         <?php endforeach; ?>
                     </div>
                     <section id="song_nav" style="width: 100%;"></section>
@@ -180,7 +180,7 @@
                             </tr>
                         </thead>
                         <tbody>
- 
+
                         </tbody>
                     </table>
                 </div>
@@ -205,11 +205,9 @@
                         </div>
                         <div class="music_controls">
                             <i class="fa-solid fa-repeat repeat sec_buttons" id="repeat" title="repeat"></i>
-                            <i class="fa-solid fa-caret-left sec_buttons" id="previous" title="previous"
-                                style="font-size:25px;"></i>
+                            <i class="fa-solid fa-caret-left sec_buttons" id="previous" title="previous" style="font-size:25px;"></i>
                             <i class="fa-solid fa-play main_button" id="play" title="play" style="color:black;"></i>
-                            <i class="fa-solid fa-caret-right sec_buttons" id="next" title="next"
-                                style="font-size:25px;"></i>
+                            <i class="fa-solid fa-caret-right sec_buttons" id="next" title="next" style="font-size:25px;"></i>
                             <i class="fa-solid fa-shuffle shuffle sec_buttons" id="shuffle" title="shuffle"></i>
                         </div>
                     </div>
@@ -228,10 +226,10 @@
         <div class="content">
             <div class="close-btn" id="close-btn" onclick="togglePopup(event)">&times;</div>
             <br>
-            <div class="main-popup-content" id="createPlaylist-form" >
+            <div class="main-popup-content" id="createPlaylist-form">
                 <h2>Create a playlist</h2>
                 <form id="playlistForm" action="" method="post">
-                    <input type="hidden" name="User_ID" value="<?=$_SESSION['id']?>">
+                    <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
                     <input type="text" name="Playlist_Name" placeholder="Enter your playlist name">
                     <button id="playlistFormBtn">Create</button>
                 </form>
@@ -240,10 +238,10 @@
             <div class="main-popup-content" id="addToPlaylist-form">
                 <h2>Choose a playlist</h2>
                 <form id="addToPlaylistForm" action="" method="post">
-                        <input type="hidden" name="Song_ID">
-                        <select name="Playlist_ID">
+                    <input type="hidden" name="Song_ID">
+                    <select name="Playlist_ID">
 
-                        </select>
+                    </select>
                     <button id="addToPlaylistFormBtn">Add</button>
                 </form>
                 <p>Make your playlist more magical</p>
@@ -260,4 +258,5 @@
         </div>
     </div> -->
 </body>
+
 </html>

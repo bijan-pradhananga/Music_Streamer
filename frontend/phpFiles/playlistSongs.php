@@ -30,15 +30,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <span style='display:none;'><?=$song['Song_ID']?></span>
                 <i class='fa-solid fa-heart' style='<?=$likeDislikeStyle?>'></i>
             </td>
-            <td onclick="return confirm('Are you sure you want to delete')">
-                <span style="display:none;"><?=$song['Song_ID']?></span>
-                <i class='fas fa-trash'></i>
+            <td>
+                <i class='fas fa-trash' id="<?=$song['Song_ID']?>" onclick="deletePlaylistSong(event)"></i>
             </td>
         </tr>
 <?php
         }
     } else {
-        echo "You haven't liked any songs yet";
+        echo "You haven't added any songs to your playlist yet";
     }
 }
 ?>

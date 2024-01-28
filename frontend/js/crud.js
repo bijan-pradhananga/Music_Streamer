@@ -198,24 +198,30 @@ document.getElementById('addToPlaylistFormBtn').addEventListener('click', functi
 });
 
 //to display playlist songs
+let playlistData;
+const displayPlaylistSongs = (playlistData) =>{
+    fetch('phpFiles/playlistSongs.php', {
+        method: 'POST',
+        body: playlistData
+    })
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (data) {
+            document.querySelector('#playlist-content table tbody').innerHTML = data;
+        })
+        .catch(function (error) {
+            console.log(error);
+});
+}
+
 const showPlaylistSongs =(event)=> {
         let playlistID = event.target.id;
-        var formData = new FormData();
-        formData.append('playlistID', playlistID);
-        fetch('phpFiles/playlistSongs.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(function (response) {
-                return response.text();
-            })
-            .then(function (data) {
-                document.querySelector('#playlist-content table tbody').innerHTML = data;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        playlistData = new FormData();
+        playlistData.append('playlistID', playlistID);
+        displayPlaylistSongs(playlistData);
 }
+
 
 //to delete playlist
 function deletePlaylist(event) {
@@ -235,6 +241,33 @@ function deletePlaylist(event) {
             .then(function (data) {
                 openDiv(document.getElementById('home-section'));
                 displayPlaylist();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+}
+
+//to delete playlist song
+function deletePlaylistSong(event) {
+    event.stopPropagation();
+    var confirm = window.confirm('Are you sure you want to delete?')
+    if (confirm) {
+        let songId = event.target.id;
+        var formData = new FormData();
+        formData.append('Song_ID', songId);
+        fetch('phpFiles/deletePlaylistSong.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (data) {
+                if (data.includes("deleted")) {
+                    alert('deleted successfully');
+                }
+                displayPlaylistSongs(playlistData);
             })
             .catch(function (error) {
                 console.log(error);

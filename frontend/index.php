@@ -4,11 +4,6 @@
     $query->sessionCheck();
     $genres = $query->display("genres");
     $artists = $query->display("artists");
-    // $sql = "SELECT Songs.Song_ID,Songs.Title AS SongTitle, Artists.Artist_Name AS ArtistName, Albums.Title AS AlbumTitle, Genres.Genre_Name AS GenreName, Artists.Image AS ArtistImage
-    //         FROM Songs JOIN Artists ON Songs.Artist_ID = Artists.Artist_ID 
-    //         JOIN Albums ON Songs.Album_ID = Albums.Album_ID 
-    //         JOIN Genres ON Songs.Genre_ID = Genres.Genre_ID";
-    // $songs = $query->displayJoin($sql);
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +33,9 @@
                 </div>
                 <div class="library-section">
                     <h2>Your Library</h2>
+                    <div id="your_songs-section" title="your_songs-content" class="nav-section-members"><i
+                            class="fa-solid fa-user"></i>Your Songs
+                    </div>
                     <div id="liked-section" title="liked-content" class="nav-section-members"><i
                             class="fa-solid fa-heart"></i>Liked Songs
                     </div>
@@ -120,6 +118,27 @@
                         </thead>
                         <tbody>
 
+                        </tbody>
+                    </table>
+                </div>
+                <div id="your_songs-content" class="content-part" style="display: none;">
+                    <div class="content-header">
+                        <h1>Your Songs</h1>
+                    </div>
+                    <table width="100%" cellpadding="25px" style="text-align:center; font-size:18px;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Artist</th>
+                                <th>Genre</th>
+                                <th>Album</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         </tbody>
                     </table>
                 </div>

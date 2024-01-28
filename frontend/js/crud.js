@@ -151,29 +151,7 @@ document.getElementById('playlistFormBtn').addEventListener('click', function(ev
     .catch(error => console.error('Error:', error));
 });
 
-//to delete playlist
-function deletePlaylist(event) {
-    event.stopPropagation();
-    var confirm = window.confirm('Are you sure you want to delete?')
-    if (confirm) {
-        let playlistID = event.target.id;
-        var formData = new FormData();
-        formData.append('playlistID', playlistID);
-        fetch('phpFiles/deletePlaylist.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(function (response) {
-                return response.text();
-            })
-            .then(function (data) {
-                displayPlaylist();
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-}
+
 
 //function to display playlist options
 const displayPlaylistOptions = () =>{
@@ -239,3 +217,27 @@ const showPlaylistSongs =(event)=> {
             });
 }
 
+//to delete playlist
+function deletePlaylist(event) {
+    event.stopPropagation();
+    var confirm = window.confirm('Are you sure you want to delete?')
+    if (confirm) {
+        let playlistID = event.target.id;
+        var formData = new FormData();
+        formData.append('playlistID', playlistID);
+        fetch('phpFiles/deletePlaylist.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (data) {
+                openDiv(document.getElementById('home-section'));
+                displayPlaylist();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+}

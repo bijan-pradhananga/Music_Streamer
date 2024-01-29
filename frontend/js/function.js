@@ -31,10 +31,10 @@ const generateRandomColor = () => {
 }
 
 //unique color for each box
-boxContents.forEach((boxContent) => {
-    let color = generateRandomColor();
-    boxContent.style.background = color;
-})
+// boxContents.forEach((boxContent) => {
+//     let color = generateRandomColor();
+//     boxContent.style.background = color;
+// })
 
 //Function to open the div when the sidebar buttons are clicked
 function openDiv (navIcon){

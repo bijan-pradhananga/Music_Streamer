@@ -95,9 +95,7 @@ function likeDislikeFn(event) {
             return response.text();
         })
         .then(function (data) {
-            // console.log(data);
             //change the color of the icon
-            // icon.style.transition = 'color 0.3s ease';
             if (icon.style.color === 'white') {
                 icon.style.color = '#284edb';
             } else {
@@ -139,7 +137,6 @@ document.getElementById('playlistFormBtn').addEventListener('click', function(ev
     })
     .then(response => response.text())
     .then(data => {
-
         displayPlaylist();
         if (data.includes("Playlist Successfully Created")) {
             document.querySelector('.popup').classList.toggle('active');
@@ -150,8 +147,6 @@ document.getElementById('playlistFormBtn').addEventListener('click', function(ev
     })
     .catch(error => console.error('Error:', error));
 });
-
-
 
 //function to display playlist options
 const displayPlaylistOptions = () =>{
@@ -221,7 +216,6 @@ const showPlaylistSongs =(event)=> {
         playlistData.append('playlistID', playlistID);
         displayPlaylistSongs(playlistData);
 }
-
 
 //to delete playlist
 function deletePlaylist(event) {

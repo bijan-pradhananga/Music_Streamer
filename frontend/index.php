@@ -79,7 +79,11 @@ $artists = $query->display("artists");
                     <h1 style="margin-top: 1rem;">Artist</h1>
                     <div class="home-content-box artist-box" id="genre">
                         <?php foreach ($artists as $artist) : ?>
-                            <div class="box-content"><a href="#song_nav"><?php echo $artist['Artist_Name']; ?></a></div>
+                            <div class="box-content" style="background-image: url(assets/artists/<?= $artist['Image'] ?>);
+                            background-size: cover;">
+                                <img src="" alt="">
+                                <a href="#song_nav"><?php echo $artist['Artist_Name']; ?></a>
+                            </div>
                         <?php endforeach; ?>
                     </div>
                     <section id="song_nav" style="width: 100%;"></section>

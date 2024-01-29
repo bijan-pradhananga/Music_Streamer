@@ -279,11 +279,21 @@ td .fa-trash:hover{
     border-radius: 10px;
     font-weight: 600;
     font-size: 20px;
-    
-    padding: 5px;
+    padding: 3px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }
 
+/* styling the artist box */
+.artist-box .box-content{
+    display: grid;
+    place-items: center;
+}
+
+.artist-box .box-content img{
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+}
 
 @media (max-width: 1280px) {
     .box-content {

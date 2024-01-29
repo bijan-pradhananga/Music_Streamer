@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2024 at 04:31 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Jan 29, 2024 at 01:29 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -78,26 +78,23 @@ INSERT INTO `artists` (`Artist_ID`, `Artist_Name`, `Image`) VALUES
 
 CREATE TABLE `genres` (
   `Genre_ID` int(11) NOT NULL,
-  `Genre_Name` varchar(255) NOT NULL
+  `Genre_Name` varchar(255) NOT NULL,
+  `Genre_Image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `genres`
 --
 
-INSERT INTO `genres` (`Genre_ID`, `Genre_Name`) VALUES
-(1, 'Pop'),
-(2, 'Rock'),
-(3, 'Hip Hop'),
-(4, 'Jazz'),
-(5, 'Country'),
-(6, 'Electronic'),
-(7, 'R&B'),
-(8, 'Classical'),
-(9, 'Reggae'),
-(10, 'Blues'),
-(11, 'Metal'),
-(12, 'Indie');
+INSERT INTO `genres` (`Genre_ID`, `Genre_Name`, `Genre_Image`) VALUES
+(1, 'Pop', 'pop.jpg'),
+(2, 'Rock', 'rock.jpg'),
+(3, 'Hip Hop', 'hip hop.jpg'),
+(4, 'Jazz', 'jazz.jpg'),
+(5, 'Country', 'country.jpg'),
+(6, 'Electronic', 'electronic.jpg'),
+(8, 'Classical', 'classical.jpg'),
+(12, 'Indie', 'indie.jpg');
 
 -- --------------------------------------------------------
 
@@ -116,14 +113,19 @@ CREATE TABLE `likedsongs` (
 --
 
 INSERT INTO `likedsongs` (`User_ID`, `Song_ID`, `timestamp`) VALUES
-(1, 1, '2024-01-23 03:58:27'),
-(1, 7, '2024-01-18 03:26:29'),
-(1, 8, '2024-01-18 03:26:30'),
-(2, 3, '2024-01-02 06:34:42'),
+(1, 2, '2024-01-29 11:23:16'),
+(1, 4, '2024-01-29 11:23:17'),
+(1, 5, '2024-01-29 11:23:18'),
+(1, 6, '2024-01-29 12:22:37'),
+(1, 8, '2024-01-29 12:22:39'),
+(2, 1, '2024-01-29 12:15:32'),
+(2, 2, '2024-01-28 12:32:02'),
+(2, 3, '2024-01-29 12:15:33'),
 (2, 4, '2024-01-18 04:20:11'),
-(2, 6, '2024-01-01 01:20:57'),
-(2, 7, '2024-01-09 09:00:05'),
-(2, 8, '2024-01-01 01:23:17');
+(2, 5, '2024-01-29 12:15:34'),
+(2, 6, '2024-01-29 12:15:35'),
+(2, 7, '2024-01-29 12:15:36'),
+(2, 8, '2024-01-29 12:15:37');
 
 -- --------------------------------------------------------
 
@@ -145,7 +147,7 @@ CREATE TABLE `playlists` (
 INSERT INTO `playlists` (`Playlist_ID`, `User_ID`, `Playlist_Name`, `Created_Date`) VALUES
 (10, 2, 'myworld', '2024-01-09 09:04:41'),
 (11, 2, 'myPlaylist3', '2024-01-09 09:13:04'),
-(27, 1, 'meroPlaylist', '2024-01-23 03:57:51');
+(30, 1, 'myPlaylist', '2024-01-28 11:08:26');
 
 -- --------------------------------------------------------
 
@@ -163,7 +165,7 @@ CREATE TABLE `playlist_songs` (
 --
 
 INSERT INTO `playlist_songs` (`Playlist_ID`, `Song_ID`) VALUES
-(27, 1);
+(30, 1);
 
 -- --------------------------------------------------------
 
@@ -302,7 +304,7 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `playlists`
 --
 ALTER TABLE `playlists`
-  MODIFY `Playlist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `Playlist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `songs`

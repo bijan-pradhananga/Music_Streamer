@@ -18,9 +18,9 @@ const updateWelcomeMsg = () => {
 updateWelcomeMsg();
 
 // Loop through each artist box
-artistBoxContents.forEach(artistBox => {
+boxContents.forEach(box => {
     // Find the image within the artist box
-    const image = artistBox.querySelector('img');
+    const image = box.querySelector('img');
     // Create a canvas element
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
@@ -42,7 +42,7 @@ artistBoxContents.forEach(artistBox => {
     g = Math.floor(g / (imageData.length / 4));
     b = Math.floor(b / (imageData.length / 4));
     // Set the background color of the artist box
-    artistBox.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    box.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 });
 
 //Function to open the div when the sidebar buttons are clicked
@@ -67,7 +67,6 @@ function openDiv (navIcon){
         let playlistName = navIcon.querySelector('div').innerText;
         // changing the name of the playlist
         playlistHeading.innerText = playlistName;
-        
     }
     let contentFile = document.getElementById(divName);
     contentFile.style.display = 'block';

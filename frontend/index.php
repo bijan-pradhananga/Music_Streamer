@@ -73,19 +73,22 @@ $artists = $query->display("artists");
                     <h1>Genre</h1>
                     <div class="home-content-box genre-box" id="genre">
                         <?php foreach ($genres as $genre) : ?>
-                            <div class="box-content">
-                                <a href="#song_nav"><?php echo $genre['Genre_Name']; ?></a>
-                            </div>
+                            <a href="#song_nav">
+                                <div class="box-content">
+                                    <div> <?php echo $genre['Genre_Name']; ?></div>
+                                    <img src="assets/genres/<?=$genre['Genre_Image'];?>" >
+                                </div>
+                            </a>
                         <?php endforeach; ?>
                     </div>
                     <h1 style="margin-top: 1rem;">Artist</h1>
                     <div class="home-content-box artist-box" id="genre">
                         <?php foreach ($artists as $artist) : ?>
                             <a href="#song_nav">
-                            <div class="box-content">
-                                <img src="assets/artists/<?= $artist['Image'] ?>" alt="">
-                                <?php echo $artist['Artist_Name']; ?>
-                            </div>
+                                <div class="box-content">
+                                    <img src="assets/artists/<?= $artist['Image'] ?>" alt="">
+                                    <?php echo $artist['Artist_Name']; ?>
+                                </div>
                             </a>
                         <?php endforeach; ?>
                     </div>

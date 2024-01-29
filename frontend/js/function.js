@@ -2,6 +2,7 @@ let welcomeMsg = document.querySelector('.top-right-bar h2');
 let navIcons = document.querySelectorAll('.nav-section-members');
 let searchBar = document.getElementById('search-bar');
 let boxContents = document.querySelectorAll('.box-content');
+let artistBoxContents = document.querySelectorAll('.artist-box .box-content');
 
 // Function to update the welcome msg
 const updateWelcomeMsg = () => {
@@ -16,25 +17,33 @@ const updateWelcomeMsg = () => {
 }
 updateWelcomeMsg();
 
-//function to generate random color
-const generateRandomColor = () => {
-    const red = Math.floor(Math.random() * 256);
-    const green = Math.floor(Math.random() * 256);
-    const blue = Math.floor(Math.random() * 256);
-    const red2 = Math.floor(Math.random() * 256);
-    const green2 = Math.floor(Math.random() * 256);
-    const blue2 = Math.floor(Math.random() * 256);
-    const alpha = Math.random(); // Random opacity value between 0 and 1
-    const randomColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
-    const randomColor2 = `rgba(${red2}, ${green2}, ${blue2}, ${alpha})`;
-    return `linear-gradient(130deg, ${randomColor} 0%, ${randomColor2} 100%)`;
-}
-
-//unique color for each box
-// boxContents.forEach((boxContent) => {
-//     let color = generateRandomColor();
-//     boxContent.style.background = color;
-// })
+// Loop through each artist box
+artistBoxContents.forEach(artistBox => {
+    // Find the image within the artist box
+    const image = artistBox.querySelector('img');
+    // Create a canvas element
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    // Set the canvas size to match the image dimensions
+    canvas.width = image.width;
+    canvas.height = image.height;
+    // Draw the image onto the canvas
+    context.drawImage(image, 0, 0, image.width, image.height);
+    // Get the image data from the canvas
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    // Calculate the average RGB values
+    let r = 0, g = 0, b = 0;
+    for (let i = 0; i < imageData.length; i += 4) {
+        r += imageData[i];
+        g += imageData[i + 1];
+        b += imageData[i + 2];
+    }
+    r = Math.floor(r / (imageData.length / 4));
+    g = Math.floor(g / (imageData.length / 4));
+    b = Math.floor(b / (imageData.length / 4));
+    // Set the background color of the artist box
+    artistBox.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+});
 
 //Function to open the div when the sidebar buttons are clicked
 function openDiv (navIcon){

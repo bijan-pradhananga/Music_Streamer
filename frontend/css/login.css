@@ -94,6 +94,16 @@ body{
     border-bottom: 2px solid #1B1D21;
 }
 
+.login-form #email:focus{
+    transition: 300ms ease-in-out;
+    border-color: #284edb;
+}
+
+.login-form #password:focus{
+    transition: 300ms ease-in-out;
+    border-color: #284edb;
+}
+
 .login-form button{
     margin-top: 2rem;
     width: 95%;
@@ -101,4 +111,11 @@ body{
     color: white;
     background-color: #1B1D21;
     border-radius: 25px;
+    cursor: pointer;
+}
+
+.login-form button:hover{
+    transition: 300ms ease-in-out;
+    background-color: #284edb;
+    border: 1px solid #284edb;
 }

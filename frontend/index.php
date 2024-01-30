@@ -151,7 +151,9 @@ $artists = $query->display("artists");
                         </thead>
                         <tbody>
                         </tbody>
+                        
                     </table>
+                    <div id='error-msg'> No Songs Found </div>
                 </div>
                 <div id="liked-content" class="content-part" style="display: none;">
                     <div class="content-header">
@@ -173,6 +175,7 @@ $artists = $query->display("artists");
                         <tbody>
                         </tbody>
                     </table>
+                    <div id='error-msg' style="display: none;">You haven't liked any songs yet</div>
                 </div>
                 <div id="playlist-content" class="content-part" style="display: none;">
                     <div class="content-header">
@@ -194,6 +197,7 @@ $artists = $query->display("artists");
 
                         </tbody>
                     </table>
+                    <div id='error-msg' style="display: none;">You haven't added any songs to your playlist yet </div>
                 </div>
                 <div id="edit_profile-content" class="content-part" style="display: none;">
                     <div class="content-header">

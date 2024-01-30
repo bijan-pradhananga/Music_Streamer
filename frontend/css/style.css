@@ -130,7 +130,7 @@ a{
 }
 
 .playlist-members:hover i {
-    transition: visibility 1s ease-in-out;
+    transition: 300ms ease-in-out;
     visibility: visible;
 }
 
@@ -518,13 +518,12 @@ table {
 /* styling the error msg  */
 #error-msg{
     padding: 25px;
-    font-size: 20px;
+    font-size: 22px;
     text-align: center;
     display: grid;
-    align-items: center;
+    place-items: center;
     width: 100%;
     height: 5vh;
-    background-color: red;
 }
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2024 at 01:29 PM
+-- Generation Time: Jan 30, 2024 at 08:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,10 @@ INSERT INTO `albums` (`Album_ID`, `Title`, `Artist_ID`, `Genre_ID`) VALUES
 (3, 'Fairytales', 5, 12),
 (4, '21st Century Breakdown', 3, 2),
 (5, 'Reckless', 4, 2),
-(6, 'Most Wanted, Vol. 2', 6, 1);
+(6, 'Most Wanted, Vol. 2', 6, 1),
+(7, 'Prayers & Promises', 8, 5),
+(8, 'After Hours', 9, 6),
+(9, 'Encore', 10, 3);
 
 -- --------------------------------------------------------
 
@@ -68,7 +71,10 @@ INSERT INTO `artists` (`Artist_ID`, `Artist_Name`, `Image`) VALUES
 (3, 'Green Day', 'green_day.jpg'),
 (4, 'Bryan Adams', 'bryan_adams.jpg'),
 (5, 'Alexander Rybak', 'alexander_rybak.jpg'),
-(6, 'Charlie Puth', 'charlie_puth.jpg');
+(6, 'Charlie Puth', 'charlie_puth.jpg'),
+(8, 'John Denver', 'john_denver.jpg'),
+(9, 'Weeknd', 'weeknd.jpg'),
+(10, 'Eminem', 'eminem.jpg');
 
 -- --------------------------------------------------------
 
@@ -113,11 +119,10 @@ CREATE TABLE `likedsongs` (
 --
 
 INSERT INTO `likedsongs` (`User_ID`, `Song_ID`, `timestamp`) VALUES
-(1, 2, '2024-01-29 11:23:16'),
-(1, 4, '2024-01-29 11:23:17'),
-(1, 5, '2024-01-29 11:23:18'),
-(1, 6, '2024-01-29 12:22:37'),
-(1, 8, '2024-01-29 12:22:39'),
+(1, 1, '2024-01-30 06:55:35'),
+(1, 2, '2024-01-30 06:47:15'),
+(1, 3, '2024-01-30 02:48:02'),
+(1, 10, '2024-01-30 07:12:39'),
 (2, 1, '2024-01-29 12:15:32'),
 (2, 2, '2024-01-28 12:32:02'),
 (2, 3, '2024-01-29 12:15:33'),
@@ -147,7 +152,8 @@ CREATE TABLE `playlists` (
 INSERT INTO `playlists` (`Playlist_ID`, `User_ID`, `Playlist_Name`, `Created_Date`) VALUES
 (10, 2, 'myworld', '2024-01-09 09:04:41'),
 (11, 2, 'myPlaylist3', '2024-01-09 09:13:04'),
-(30, 1, 'myPlaylist', '2024-01-28 11:08:26');
+(32, 1, 'myPlaylist', '2024-01-29 14:20:30'),
+(33, 1, 'meroPlaylist', '2024-01-29 14:37:09');
 
 -- --------------------------------------------------------
 
@@ -165,7 +171,7 @@ CREATE TABLE `playlist_songs` (
 --
 
 INSERT INTO `playlist_songs` (`Playlist_ID`, `Song_ID`) VALUES
-(30, 1);
+(32, 1);
 
 -- --------------------------------------------------------
 
@@ -193,7 +199,10 @@ INSERT INTO `songs` (`Song_ID`, `Title`, `Artist_ID`, `Album_ID`, `Genre_ID`) VA
 (5, '21 Guns', 3, 4, 2),
 (6, 'See You Again', 6, 6, 1),
 (7, 'Love Story', 2, 2, 1),
-(8, 'Perfect', 1, 1, 1);
+(8, 'Perfect', 1, 1, 1),
+(9, 'Country Roads', 8, 7, 5),
+(10, 'Save Your Tears', 9, 8, 6),
+(11, 'Mockingbird', 10, 9, 3);
 
 -- --------------------------------------------------------
 
@@ -286,13 +295,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `albums`
 --
 ALTER TABLE `albums`
-  MODIFY `Album_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Album_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `Artist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Artist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `genres`
@@ -304,13 +313,13 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `playlists`
 --
 ALTER TABLE `playlists`
-  MODIFY `Playlist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `Playlist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `Song_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Song_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`

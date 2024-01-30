@@ -9,7 +9,14 @@ mainSearchBar.addEventListener('keyup', function () {
             return response.text();
         })
         .then(function (data) {
-            document.getElementById('search-content').querySelector('table tbody').innerHTML = data;
+            let searchContent = document.getElementById('search-content');
+            if (data.includes('No Songs Found')) {
+                searchContent.querySelector('#error-msg').style.display = 'block';
+                searchContent.querySelector('table tbody').innerHTML = '';
+            }else{
+                searchContent.querySelector('#error-msg').style.display = 'none';
+                searchContent.querySelector('table tbody').innerHTML = data;
+            }
         })
         .catch(function (error) {
             console.log(error);

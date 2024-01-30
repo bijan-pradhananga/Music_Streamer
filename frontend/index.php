@@ -243,7 +243,7 @@ $artists = $query->display("artists");
         </div>
     </div>
     <!-- for the popup  -->
-    <div class="popup" id="playlistMaker-popup">
+    <div class="popup">
         <div class="overlay"></div>
         <div class="content">
             <div class="close-btn" id="close-btn" onclick="togglePopup(event)">&times;</div>

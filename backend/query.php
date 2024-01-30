@@ -130,8 +130,8 @@
                 $_SESSION['auth']=TRUE;
                 header("location:index.php");
             }else{
-                $_SESSION['error']="invalid email and password";
-                echo '<script>alert("' . $_SESSION['error'] . '");</script>';
+                // $_SESSION['error']="invalid email and password";
+                echo '<div>invalid email or password</div>';
             }
         }
 

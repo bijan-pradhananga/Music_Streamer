@@ -130,6 +130,7 @@ $artists = $query->display("artists");
 
                         </tbody>
                     </table>
+                    <div id='error-msg' style="display: none;"> No Songs Found </div>
                 </div>
                 <div id="your_songs-content" class="content-part" style="display: none;">
                     <div class="content-header">

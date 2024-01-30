@@ -1,42 +1,65 @@
-<?php 
-    include('../backend/query.php');
-    if(!empty($_POST)){
-        $insQuery=new dbQuery();
-        $insQuery->insert("users",$_POST);
-        if (!empty($_FILES['image']['name'])) {
-            $insQuery->insertImg($_FILES['image']['name']);
-        }
-    }
+<?php
+include('../backend/query.php');
+$query = new dbQuery;
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/register.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <title>Register Page</title>
 </head>
 
 <body>
-    <form action="" method="post" enctype="">
-        <h2>User Registration Form</h2>
+    <div class="container">
+        <div class="content-part">
+            <img src="assets/images/logo/loginLogo2.png">
+        </div>
 
-        <form action="process_registration.php" method="post" enctype="multipart/form-data">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
+        <div class="register-part">
+            <div class="register-icon">
+                <iconify-icon icon="ri:music-fill" width="48" height="52"></iconify-icon>
+            </div>
+            <div class="register-msg">
+                <h2>Create an Account</h2>
+                <h4>Please enter your details</h4>
+            </div>
+            <div class="register-form">
+                <form action="" method="post" enctype="multipart/form-data">
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
+                    <input type="First_Name" name="First_Name" id="First_Name" placeholder="First Name"><br>
+                    <input type="Last_Name" name="Last_Name" id="Last_Name" placeholder="Last Name"><br>
+                    <input type="email" name="email" id="email" placeholder="Email"><br>
+                    <div>
+                        <input type="password" name="password" id="password" placeholder="Password"> <br>
+                    </div>
+                    <div>
+                        <input type="password" name="reenter_password" id="reenter_password" placeholder="Re-enter Password"> <br>
+                    </div>
+                    <label for="image">
+                    <div id="imgUpload" style="display: flex; justify-content:space-between;">
+                        Choose Image
+                        <div style="height:4vh; display:grid; place-items:center;">
+                            <iconify-icon icon="solar:gallery-bold" width="25" height="25"></iconify-icon>
+                        </div>
+                        <input style="display: none;" type="file" name="image" id="image">
+                    </div>
+                    </label>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
 
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image" accept="image/*" required><br>
-            <input type="submit" value="Register">
-        </form>
-    </form>
+                    <button>Sign Up</button>
+                </form>
+            </div>
+            <div class="signup-part">
+                <p>Already have an account?</p>
+                <a href="#">Sign In</a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

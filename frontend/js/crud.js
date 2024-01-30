@@ -72,7 +72,14 @@ const likedSongsDisplay = () => {
             return response.text();
         })
         .then(function (data) {
-            document.querySelector('#liked-content table tbody').innerHTML = data;
+            let likeContent = document.querySelector('#liked-content');
+            if (data.includes("You haven't liked any songs yet")) {
+                likeContent.querySelector('#error-msg').style.display = 'block';
+                likeContent.querySelector('table tbody').innerHTML = '';
+            }else{
+                likeContent.querySelector('#error-msg').style.display = 'none';
+                likeContent.querySelector('table tbody').innerHTML = data;
+            }
         })
         .catch(function (error) {
             console.log(error);
@@ -149,8 +156,6 @@ document.getElementById('playlistFormBtn').addEventListener('click', function (e
                 document.querySelector('.popup').classList.toggle('active');
                 alert('Playlist Successfully Created');
             }
-
-
         })
         .catch(error => console.error('Error:', error));
 });
@@ -210,7 +215,14 @@ const displayPlaylistSongs = (playlistData) => {
             return response.text();
         })
         .then(function (data) {
-            document.querySelector('#playlist-content table tbody').innerHTML = data;
+            let playlistContent = document.querySelector('#playlist-content');
+            if (data.includes("You haven't added any songs to your playlist yet")) {
+                playlistContent.querySelector('#error-msg').style.display = 'block';
+                playlistContent.querySelector('table tbody').innerHTML = '';
+            }else{
+                playlistContent.querySelector('#error-msg').style.display = 'none';
+                playlistContent.querySelector('table tbody').innerHTML = data;
+            }
         })
         .catch(function (error) {
             console.log(error);

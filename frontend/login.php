@@ -1,10 +1,7 @@
-<!-- <?php 
+<?php
     include('../backend/query.php');
-    $query= new dbQuery;
-    if (!empty($_POST)) {
-        $query->login("users",$_POST['email'],$_POST['password']);
-    }
-?> -->
+    $query = new dbQuery;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +12,7 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <div class="container">
         <div class="content-part">
@@ -44,6 +42,11 @@
                     </div>
 
                     <button>Login</button>
+                    <?php
+                    if (!empty($_POST)) {
+                        $query->login("users", $_POST['email'], $_POST['password']);
+                    }
+                    ?>
                 </form>
             </div>
             <div class="signup-part">
@@ -53,4 +56,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -56,7 +56,7 @@ $query = new dbQuery;
             </div>
             <div class="signup-part">
                 <p>Already have an account?</p>
-                <a href="#login.php">Sign In</a>
+                <a href="login.php">Sign In</a>
             </div>
         </div>
     </div>

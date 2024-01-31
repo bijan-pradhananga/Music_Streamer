@@ -51,7 +51,7 @@
             </div>
             <div class="signup-part">
                 <p>Don’t have an account?</p>
-                <a href="#register.php">Sign Up</a>
+                <a href="register.php">Sign Up</a>
             </div>
         </div>
     </div>

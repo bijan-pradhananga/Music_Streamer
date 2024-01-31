@@ -49,7 +49,12 @@ $query = new dbQuery;
                         <input style="display: none;" type="file" name="image" id="image">
                     </div>
                     </label>
-
+                    <?php 
+                        if (!empty($_POST)) {
+                            unset($_POST['reenter_password']);
+                            $query->insert("users",$_POST);
+                        }
+                    ?>
 
                     <button>Sign Up</button>
                 </form>

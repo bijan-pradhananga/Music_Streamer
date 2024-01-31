@@ -44,7 +44,7 @@ $query = new dbQuery;
                     <div id="imgUpload" style="display: flex; justify-content:space-between;">
                         Choose Image
                         <div style="height:4vh; display:grid; place-items:center;">
-                            <iconify-icon icon="solar:gallery-bold" width="25" height="25"></iconify-icon>
+                            <iconify-icon icon="solar:gallery-bold" width="20" height="20"></iconify-icon>
                         </div>
                         <input style="display: none;" type="file" name="image" id="image">
                     </div>
@@ -56,7 +56,7 @@ $query = new dbQuery;
             </div>
             <div class="signup-part">
                 <p>Already have an account?</p>
-                <a href="#">Sign In</a>
+                <a href="#login.php">Sign In</a>
             </div>
         </div>
     </div>

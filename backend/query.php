@@ -18,7 +18,7 @@
                 $key .= ",image";
                 $values .= "','". $_FILES['image']['name'];
                 // Call the insertImg function to handle image upload
-                // $this->insertImg($_FILES['image']['name']);
+                $this->insertImg($_FILES['image']['name']);
             }
             $sql="INSERT INTO $table ($key) VALUES ('$values')";
             $result = $this->conn->query($sql);

@@ -17,7 +17,7 @@ $query = new dbQuery;
 <body>
     <div class="container">
         <div class="content-part">
-            <img src="assets/images/logo/loginLogo2.png">
+            <img src="assets/images/logo/register.png">
         </div>
 
         <div class="register-part">

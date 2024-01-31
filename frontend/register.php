@@ -31,14 +31,14 @@ $query = new dbQuery;
             <div class="register-form">
                 <form action="" method="post" enctype="multipart/form-data">
 
-                    <input type="First_Name" name="First_Name" id="First_Name" placeholder="First Name"><br>
-                    <input type="Last_Name" name="Last_Name" id="Last_Name" placeholder="Last Name"><br>
-                    <input type="email" name="email" id="email" placeholder="Email"><br>
+                    <input type="First_Name" name="First_Name" id="First_Name" placeholder="First Name">
+                    <input type="Last_Name" name="Last_Name" id="Last_Name" placeholder="Last Name">
+                    <input type="email" name="email" id="email" placeholder="Email">
                     <div>
-                        <input type="password" name="password" id="password" placeholder="Password"> <br>
+                        <input type="password" name="password" id="password" placeholder="Password"> 
                     </div>
                     <div>
-                        <input type="password" name="reenter_password" id="reenter_password" placeholder="Re-enter Password"> <br>
+                        <input type="password" name="reenter_password" id="reenter_password" placeholder="Re-enter Password"> 
                     </div>
                     <label for="image">
                     <div id="imgUpload" style="display: flex; justify-content:space-between;">

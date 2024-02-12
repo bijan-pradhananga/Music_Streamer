@@ -2,6 +2,7 @@
 include('../backend/query.php');
 $query = new dbQuery;
 $query->sessionCheck();
+$user= $query->fetchData("users",$_SESSION['id']);
 $genres = $query->display("genres");
 $artists = $query->display("artists");
 ?>
@@ -54,7 +55,7 @@ $artists = $query->display("artists");
                 <div class="top-right-bar">
                     <div style="display:flex;">
                         <h2></h2>
-                        <h2>&nbsp;<?= $_SESSION['first_name'] ?> </h2>
+                        <h2>&nbsp;<?= $user[0]['First_Name'] ?> </h2>
                     </div>
                     <div class="search-bar" id="search-bar" style="display: none;">
                         <input type="text" id="main-search-bar" placeholder="Enter a song to search">
@@ -64,7 +65,7 @@ $artists = $query->display("artists");
                     </div>
                 </div>
                 <div class="profile" id="edit_profile-section" title="edit_profile-content" onclick="openDiv(this)">
-                    <img src="uploads/<?= $_SESSION['image'] ?>" alt="profile">
+                    <img src="uploads/<?= $user[0]['Image'] ?>" alt="profile">
                 </div>
             </div>
             <div class="main-content" style="color:white;">
@@ -213,20 +214,25 @@ $artists = $query->display("artists");
                                     <label for="password">Password</label><br>
                                 </div>
                                 <div>
-                                    <input type="text" name="first_name"> <br>
-                                    <input type="text" name="Last_name"> <br>
-                                    <input type="email" name="email"> <br>
-                                    <input type="password" name="password"><br>
-                                    <button>Save Changes</button>
+                                    <input type="text" name="first_name" value="<?=$_SESSION['user']['First_Name']?>"> <br>
+                                    <input type="text" name="Last_name"  value="<?=$_SESSION['user']['Last_Name']?>"> <br>
+                                    <input type="email" name="email"  value="<?=$_SESSION['user']['Email']?>"> <br>
+                                    <input type="password" name="password"  value="<?=$_SESSION['user']['Password']?>"><br>
+                                    <button name="edit_btn">Save Changes</button>
                                 </div>
-
+                                <?php
+                                    if (isset($_POST['edit_btn'])) {
+                                        unset($_POST['edit_btn']);
+                                        $query->edit("users","User_ID",$_SESSION['id'],$_POST);
+                                    }
+                                ?>
                             </div>
                             <div class="edit_profile-img-part">
                                 <div class="edit_profile-img">
-
+                    
                                 </div>
                             </div>
-                        
+   
                     </div>
                     </form>
                 </div>

@@ -204,7 +204,7 @@ $artists = $query->display("artists");
                     <div class="content-header">
                         <h1>Your Profile</h1>
                     </div>
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                     <div class="edit_profile-form">
                             <div class="edit_profile-form-part">
                                 <div>
@@ -214,10 +214,10 @@ $artists = $query->display("artists");
                                     <label for="password">Password</label><br>
                                 </div>
                                 <div>
-                                    <input type="text" name="first_name" value="<?=$_SESSION['user']['First_Name']?>"> <br>
-                                    <input type="text" name="Last_name"  value="<?=$_SESSION['user']['Last_Name']?>"> <br>
-                                    <input type="email" name="email"  value="<?=$_SESSION['user']['Email']?>"> <br>
-                                    <input type="password" name="password"  value="<?=$_SESSION['user']['Password']?>"><br>
+                                    <input type="text" name="first_name" value="<?=$user[0]['First_Name']?>"> <br>
+                                    <input type="text" name="Last_name"  value="<?=$user[0]['Last_Name']?>"> <br>
+                                    <input type="email" name="email"  value="<?=$user[0]['Email']?>"> <br>
+                                    <input type="password" name="password"  value="<?=$user[0]['Password']?>"><br>
                                     <button name="edit_btn">Save Changes</button>
                                 </div>
                                 <?php
@@ -228,11 +228,15 @@ $artists = $query->display("artists");
                                 ?>
                             </div>
                             <div class="edit_profile-img-part">
+                                <label for="Image">
                                 <div class="edit_profile-img">
-                    
+                                    <img src="uploads/<?= $user[0]['Image'] ?>">
+                                    <i class="fas fa-camera"></i>
+                                    <input type="file" name="Image" id="Image" style="display: none;">
                                 </div>
+                                </label>
+                                
                             </div>
-   
                     </div>
                     </form>
                 </div>

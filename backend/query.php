@@ -69,7 +69,7 @@
         }
 
         function fetchData($table,$id){
-            $sql= "SELECT * FROM $table WHERE id = $id";
+            $sql= "SELECT * FROM $table WHERE User_ID = $id";
             $result=$this->conn->query($sql);
             if($result->num_rows >0){
                 while ($row=$result->fetch_assoc()) {
@@ -80,7 +80,7 @@
         }
 
 
-        function edit($table,$id,$tableData){
+        function edit($table,$id,$idVal,$tableData){
             $keys=array_keys($tableData);
             $values=array_values($tableData);
             $data = [];
@@ -88,12 +88,12 @@
                 $data[]= "{$keys[$i]}='{$values[$i]}' ";
             }
             $dataString = implode(',',$data); // it gives result -> name='$name' ,age='$age' ,address='$address'
-            $sql="UPDATE $table SET $dataString  WHERE id = '$id'";
+            $sql="UPDATE $table SET $dataString  WHERE $id = '$idVal'";
             $result = $this->conn->query($sql);
-            if($result){
-                echo "Data updated successfully";
-                echo '<br>Go back to <a href="display.php">table</a>';
-            }
+            // if($result){
+            //     echo "Data updated successfully";
+            //     echo '<br>Go back to <a href="display.php">table</a>';
+            // }
         }
 
         function search($searchData){
@@ -125,8 +125,7 @@
                 $row = $result->fetch_assoc();
                 session_start(); 
                 $_SESSION['id']=$row['User_ID'];
-                $_SESSION['first_name']=$row['First_Name'];
-                $_SESSION['image']=$row['Image'];
+                $_SESSION['user']=$row;
                 $_SESSION['auth']=TRUE;
                 header("location:index.php");
             }else{

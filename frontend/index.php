@@ -199,13 +199,38 @@ $artists = $query->display("artists");
                     </table>
                     <div id='error-msg' style="display: none;">You haven't added any songs to your playlist yet </div>
                 </div>
-                <div id="edit_profile-content" class="content-part" style="display: none;">
+                <div id="edit_profile-content" class="content-part" style="display: none;" >
                     <div class="content-header">
                         <h1>Your Profile</h1>
                     </div>
+                    <form action="" method="post">
+                    <div class="edit_profile-form">
+                            <div class="edit_profile-form-part">
+                                <div>
+                                    <label for="first_name">First Name</label><br>
+                                    <label for="Last_name">Last Name</label><br>
+                                    <label for="email">Email</label><br>
+                                    <label for="password">Password</label><br>
+                                </div>
+                                <div>
+                                    <input type="text" name="first_name"> <br>
+                                    <input type="text" name="Last_name"> <br>
+                                    <input type="email" name="email"> <br>
+                                    <input type="password" name="password"><br>
+                                    <button>Save Changes</button>
+                                </div>
+
+                            </div>
+                            <div class="edit_profile-img-part">
+                                <div class="edit_profile-img">
+
+                                </div>
+                            </div>
+                        
+                    </div>
+                    </form>
                 </div>
             </div>
-
             <div class="bottombar">
                 <div class="music-player">
                     <audio id="audio" style="display: none;"></audio>

@@ -280,6 +280,34 @@ td .fa-trash:hover{
     box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }
 
+/* styling the edit profile page */
+.edit_profile-form{
+    width: 100%;
+    font-size: 22px;
+    display: flex;
+    background-color: #000000;
+    justify-content: center;
+}
+
+.edit_profile-form-part{
+    width: 70%;
+    display: flex;
+}
+
+.edit_profile-img-part{
+    width: 26%;
+}
+
+.edit_profile-img{
+    width: 17rem;
+    height: 17rem;
+    border-radius: 50%;
+    background-color: lightgray;
+    z-index: 3;
+    transform: translateY(-20%);
+    cursor: pointer;
+}
+
 /* styling the genre box */
 .genre-box .box-content{
     position: relative;

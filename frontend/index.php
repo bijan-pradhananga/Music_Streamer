@@ -2,7 +2,7 @@
 include('../backend/query.php');
 $query = new dbQuery;
 $query->sessionCheck();
-$user= $query->fetchData("users",$_SESSION['id']);
+$user = $query->fetchData("users", $_SESSION['id']);
 $genres = $query->display("genres");
 $artists = $query->display("artists");
 ?>
@@ -25,7 +25,7 @@ $artists = $query->display("artists");
 
 <body>
     <div class="container">
-        <div class="sidebar" id="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-contents">
                 <h1>MusicX</h1>
                 <div class="nav-sections">
@@ -49,8 +49,8 @@ $artists = $query->display("artists");
             <div class="logout-section">
                 <i class="fa-solid fa-right-from-bracket fa-fw"></i><a href="logout.php">Logout</a>
             </div>
-        </div>
-        <div class="contents">
+        </aside>
+        <main class="contents">
             <div class="topbar">
                 <div class="top-right-bar">
                     <div style="display:flex;">
@@ -77,7 +77,7 @@ $artists = $query->display("artists");
                             <a href="#song_nav">
                                 <div class="box-content">
                                     <div> <?php echo $genre['Genre_Name']; ?></div>
-                                    <img src="assets/genres/<?=$genre['Genre_Image'];?>" >
+                                    <img src="assets/genres/<?= $genre['Genre_Image']; ?>">
                                 </div>
                             </a>
                         <?php endforeach; ?>
@@ -134,8 +134,11 @@ $artists = $query->display("artists");
                     <div id='error-msg' style="display: none;"> No Songs Found </div>
                 </div>
                 <div id="your_songs-content" class="content-part" style="display: none;">
-                    <div class="content-header">
+                    <div class="content-header" id="your_songs-header">
                         <h1>Your Songs</h1>
+                        <div class="uploadBtn" id="uploadBtn" onclick="togglePopup(event)">
+                        <i id="uploadBtn" class="fa-solid fa-upload"></i>
+                        </div>
                     </div>
                     <table width="100%" cellpadding="25px" style="text-align:center; font-size:18px;">
                         <thead>
@@ -152,7 +155,7 @@ $artists = $query->display("artists");
                         </thead>
                         <tbody>
                         </tbody>
-                        
+
                     </table>
                     <div id='error-msg'> No Songs Found </div>
                 </div>
@@ -200,12 +203,12 @@ $artists = $query->display("artists");
                     </table>
                     <div id='error-msg' style="display: none;">You haven't added any songs to your playlist yet </div>
                 </div>
-                <div id="edit_profile-content" class="content-part" style="display: none;" >
+                <div id="edit_profile-content" class="content-part" style="display: none;">
                     <div class="content-header">
                         <h1>Your Profile</h1>
                     </div>
                     <form action="" method="post" enctype="multipart/form-data">
-                    <div class="edit_profile-form">
+                        <div class="edit_profile-form">
                             <div class="edit_profile-form-part">
                                 <div>
                                     <label for="first_name">First Name</label><br>
@@ -214,30 +217,30 @@ $artists = $query->display("artists");
                                     <label for="password">Password</label><br>
                                 </div>
                                 <div>
-                                    <input type="text" name="first_name" value="<?=$user[0]['First_Name']?>"> <br>
-                                    <input type="text" name="Last_name"  value="<?=$user[0]['Last_Name']?>"> <br>
-                                    <input type="email" name="email"  value="<?=$user[0]['Email']?>"> <br>
-                                    <input type="password" name="password"  value="<?=$user[0]['Password']?>"><br>
+                                    <input type="text" name="first_name" value="<?= $user[0]['First_Name'] ?>"> <br>
+                                    <input type="text" name="Last_name" value="<?= $user[0]['Last_Name'] ?>"> <br>
+                                    <input type="email" name="email" value="<?= $user[0]['Email'] ?>"> <br>
+                                    <input type="password" name="password" value="<?= $user[0]['Password'] ?>"><br>
                                     <button name="edit_btn">Save Changes</button>
                                 </div>
                                 <?php
-                                    if (isset($_POST['edit_btn'])) {
-                                        unset($_POST['edit_btn']);
-                                        $query->edit("users","User_ID",$_SESSION['id'],$_POST);
-                                    }
+                                if (isset($_POST['edit_btn'])) {
+                                    unset($_POST['edit_btn']);
+                                    $query->edit("users", "User_ID", $_SESSION['id'], $_POST);
+                                }
                                 ?>
                             </div>
                             <div class="edit_profile-img-part">
                                 <label for="Image">
-                                <div class="edit_profile-img">
-                                    <img src="uploads/<?= $user[0]['Image'] ?>">
-                                    <i class="fas fa-camera"></i>
-                                    <input type="file" name="Image" id="Image" style="display: none;">
-                                </div>
+                                    <div class="edit_profile-img">
+                                        <img src="uploads/<?= $user[0]['Image'] ?>">
+                                        <i class="fas fa-camera"></i>
+                                        <input type="file" name="Image" id="Image" style="display: none;">
+                                    </div>
                                 </label>
-                                
+
                             </div>
-                    </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -275,7 +278,7 @@ $artists = $query->display("artists");
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
     <!-- for the popup  -->
     <div class="popup">
@@ -302,6 +305,9 @@ $artists = $query->display("artists");
                     <button id="addToPlaylistFormBtn">Add</button>
                 </form>
                 <p>Make your playlist more magical</p>
+            </div>
+            <div class="main-popup-content" id="uploadSong-form">
+                <h2>Upload a song</h2>
             </div>
         </div>
     </div>

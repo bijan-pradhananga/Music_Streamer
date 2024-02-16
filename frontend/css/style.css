@@ -398,11 +398,36 @@ table {
   td{
     cursor: pointer;
   }
-/* 
-  .tdImg{
-    width: 50px;
-    height: 50px;
-  } */
+
+/* styling the header of your songs section*/
+#your_songs-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+button{
+    cursor: pointer;
+}
+
+#your_songs-header .uploadBtn{
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #f6f6f6;
+    color: #1C1C1E;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    font-size: larger;
+    transition: 300ms ease-in-out;
+}
+
+#your_songs-header .uploadBtn:hover{
+    background-color: #284edb;
+    color: white;
+  
+}
+
 
 /* styling the bottombar which contains the music player */
 .bottombar {

@@ -281,3 +281,49 @@ function deletePlaylistSong(event) {
             console.log(error);
         });
 }
+
+//to create an album
+function createAlbum() {
+    let formData = new FormData();
+    albumForm.querySelectorAll('input').forEach(input=>{
+        formData.append(input.name,input.value);
+    });
+    fetch('phpFiles/createAlbum.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data.includes('success')) {
+            alert('album created');
+        }else{
+            console.log('error making album');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+//to get albums
+const getAlbums = () => {
+    fetch('phpFiles/userAlbums.php')
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (data) {
+            document.getElementById('albumOptions').innerHTML = data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+
+let albumForm = document.getElementById('createAlbumForm');
+albumForm.addEventListener('submit', (event)=> {
+    event.preventDefault();
+    createAlbum();
+    getAlbums()
+});
+

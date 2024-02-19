@@ -52,7 +52,7 @@ $query = new dbQuery;
                     <?php 
                         if (!empty($_POST)) {
                             unset($_POST['reenter_password']);
-                            $query->insert("users",$_POST);
+                            $query->insert("users",$_POST,'uploads');
                         }
                     ?>
 

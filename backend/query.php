@@ -3,22 +3,22 @@
 
     class dbQuery extends Database{
 
-        function insertImg($imageFile){
+        function insertImg($imageFile,$loc){
             $image=$imageFile;
             $tmp=$_FILES['image']['tmp_name'];
-            $path="uploads/";
+            $path=$loc."/";
             move_uploaded_file($tmp,$path.$image);
         }
 
-        function insert($table,$tableData){
+        function insert($table,$tableData,$loc){
             $key=implode(",",array_keys($tableData));
             $values=implode("','",array_values($tableData));
                 // If there is an image in the form
-            if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+            if (isset($_FILES['image']) && $loc!='' && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
                 $key .= ",image";
                 $values .= "','". $_FILES['image']['name'];
                 // Call the insertImg function to handle image upload
-                $this->insertImg($_FILES['image']['name']);
+                $this->insertImg($_FILES['image']['name'],$loc);
             }
             $sql="INSERT INTO $table ($key) VALUES ('$values')";
             $result = $this->conn->query($sql);
@@ -161,6 +161,27 @@
             $result = $this->conn->query($sql);
             if ($result) {
                 echo "disliked";
+            }
+        }
+
+        function checkArtist($userId){
+            $sql = "SELECT * FROM artists WHERE User_ID=$userId ";
+            $result = $this->conn->query($sql);
+            if($result && $result->num_rows > 0) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function getArtistId($userId){
+            $sql = "SELECT Artist_ID FROM artists WHERE User_ID=$userId ";
+            $result = $this->conn->query($sql);
+            if($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                return $row['Artist_ID'];
+            }else{
+                return false;
             }
         }
 

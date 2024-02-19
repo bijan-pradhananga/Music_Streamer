@@ -137,7 +137,7 @@ $artists = $query->display("artists");
                     <div class="content-header" id="your_songs-header">
                         <h1>Your Songs</h1>
                         <div class="uploadBtn" id="uploadBtn" onclick="togglePopup(event)">
-                        <i id="uploadBtn" class="fa-solid fa-upload"></i>
+                            <i id="uploadBtn" class="fa-solid fa-upload"></i>
                         </div>
                     </div>
                     <table width="100%" cellpadding="25px" style="text-align:center; font-size:18px;">
@@ -307,7 +307,50 @@ $artists = $query->display("artists");
                 <p>Make your playlist more magical</p>
             </div>
             <div class="main-popup-content" id="uploadSong-form">
-                <h2>Upload a song</h2>
+                <!-- if he/she is an artist  -->
+                <?php if ($query->checkArtist($_SESSION['id'])) {  $artistId = $query->getArtistId($_SESSION['id']); ?>
+                    <h2>Upload a Song</h2>
+                    <form id="createAlbumForm" action="" method="post">
+                        Create Album:
+                        <input type="text" name="Title" placeholder="Enter Your Album Name">
+                        <input type="hidden" name="Artist_ID" value="<?=$artistId ?>">
+                        <button >Create</button>
+                    </form>
+                    <form id="uploadSongForm" action="" method="post"> 
+                        <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
+                        <input type="hidden" name="Artist_ID" value="<?= $_SESSION['id'] ?>">
+                        Title: <input type="text" name="Title" placeholder="Enter your song title"> <br>
+                        Genre: <select name="Artist_ID">
+                            <?php foreach ($genres as $genre) : ?>
+                                <option value="<?= $genre['Genre_ID'] ?>"><?= $genre['Genre_Name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php ?>
+                        Album: <select name="Album_ID" id="albumOptions">
+                        
+                        </select>
+                        <br>
+                        <button id="uploadSongBtn">Upload</button>
+                    </form>
+                <?php } else { ?>
+                    <form id="registerArtistForm" method="post" enctype="multipart/form-data">
+                        <h2>Register as artist</h2>
+                        Name <input type="text" name="Artist_Name" placeholder="Enter Your Artist Name"><br>
+                        Image <input type="file" name="image" id="image"><br>
+                        <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
+                        Status <select name="status" id="">
+                            <option value="private" selected>Private</option>
+                            <option value="public">public</option>
+                        </select>
+                        <button name="registerArtist_btn">Submit</button>
+                    </form>
+                <?php } ?>
+                <?php
+                if (isset($_POST['registerArtist_btn'])) {
+                    unset($_POST['registerArtist_btn']);
+                    $query->insert("artists",$_POST,"assets/artists");
+                }
+                ?>
             </div>
         </div>
     </div>

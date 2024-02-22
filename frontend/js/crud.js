@@ -284,10 +284,7 @@ function deletePlaylistSong(event) {
 
 //to create an album
 function createAlbum() {
-    let formData = new FormData();
-    albumForm.querySelectorAll('input').forEach(input=>{
-        formData.append(input.name,input.value);
-    });
+    let formData = new FormData(albumForm);
     fetch('phpFiles/createAlbum.php', {
         method: 'POST',
         body: formData
@@ -327,3 +324,28 @@ albumForm.addEventListener('submit', (event)=> {
     getAlbums()
 });
 
+
+//to upload song
+function uploadSong() {
+    let formData = new FormData(uploadSongForm);
+    // uploadSongForm.querySelectorAll('select').forEach(select => {
+    //     formData.append(select.name, select.value);
+    // });
+    fetch('phpFiles/uploadSong.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+let uploadSongForm = document.getElementById('uploadSongForm');
+uploadSongForm.addEventListener('submit',(event)=>{
+    event.preventDefault();
+    uploadSong();
+})

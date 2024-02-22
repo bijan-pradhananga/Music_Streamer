@@ -328,16 +328,16 @@ albumForm.addEventListener('submit', (event)=> {
 //to upload song
 function uploadSong() {
     let formData = new FormData(uploadSongForm);
-    // uploadSongForm.querySelectorAll('select').forEach(select => {
-    //     formData.append(select.name, select.value);
-    // });
+    // formData.append('audio', uploadSongForm.querySelector('input[type="file"]').files[0]);
     fetch('phpFiles/uploadSong.php', {
         method: 'POST',
-        body: formData
+        body: formData,
     })
     .then(response => response.text())
     .then(data => {
-        console.log(data);
+       
+           console.log(data);
+    
     })
     .catch(error => {
         console.error('Error:', error);

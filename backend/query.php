@@ -36,6 +36,7 @@ class dbQuery extends Database
         if (isset($_FILES['audio']) && $_FILES['audio']['error'] == UPLOAD_ERR_OK) {
             // Pass the title from the form to the insertAudio function
             $this->insertAudio($_POST['Title']);
+    
         }
         $sql = "INSERT INTO $table ($key) VALUES ('$values')";
         $result = $this->conn->query($sql);

@@ -328,7 +328,6 @@ albumForm.addEventListener('submit', (event)=> {
 //to upload song
 function uploadSong() {
     let formData = new FormData(uploadSongForm);
-    // formData.append('audio', uploadSongForm.querySelector('input[type="file"]').files[0]);
     fetch('phpFiles/uploadSong.php', {
         method: 'POST',
         body: formData,

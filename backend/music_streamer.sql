@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2024 at 08:31 AM
+-- Generation Time: Feb 22, 2024 at 03:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,24 +30,24 @@ SET time_zone = "+00:00";
 CREATE TABLE `albums` (
   `Album_ID` int(11) NOT NULL,
   `Title` varchar(255) NOT NULL,
-  `Artist_ID` int(11) DEFAULT NULL,
-  `Genre_ID` int(11) DEFAULT NULL
+  `Artist_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `albums`
 --
 
-INSERT INTO `albums` (`Album_ID`, `Title`, `Artist_ID`, `Genre_ID`) VALUES
-(1, 'Divide', 1, 1),
-(2, 'Fearless', 2, 1),
-(3, 'Fairytales', 5, 12),
-(4, '21st Century Breakdown', 3, 2),
-(5, 'Reckless', 4, 2),
-(6, 'Most Wanted, Vol. 2', 6, 1),
-(7, 'Prayers & Promises', 8, 5),
-(8, 'After Hours', 9, 6),
-(9, 'Encore', 10, 3);
+INSERT INTO `albums` (`Album_ID`, `Title`, `Artist_ID`) VALUES
+(1, 'Divide', 1),
+(2, 'Fearless', 2),
+(3, 'Fairytales', 5),
+(4, '21st Century Breakdown', 3),
+(5, 'Reckless', 4),
+(6, 'Most Wanted, Vol. 2', 6),
+(7, 'Prayers & Promises', 8),
+(8, 'After Hours', 9),
+(9, 'Encore', 10),
+(10, 'demoAlbum', 11);
 
 -- --------------------------------------------------------
 
@@ -58,23 +58,26 @@ INSERT INTO `albums` (`Album_ID`, `Title`, `Artist_ID`, `Genre_ID`) VALUES
 CREATE TABLE `artists` (
   `Artist_ID` int(11) NOT NULL,
   `Artist_Name` varchar(255) NOT NULL,
-  `Image` varchar(255) DEFAULT NULL
+  `Image` varchar(255) DEFAULT NULL,
+  `User_ID` int(11) DEFAULT NULL,
+  `status` enum('public','private') DEFAULT 'public'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `artists`
 --
 
-INSERT INTO `artists` (`Artist_ID`, `Artist_Name`, `Image`) VALUES
-(1, 'Ed Sheeran', 'ed_sheeran.jpg'),
-(2, 'Taylor Swift', 'taylor_swift.jpg'),
-(3, 'Green Day', 'green_day.jpg'),
-(4, 'Bryan Adams', 'bryan_adams.jpg'),
-(5, 'Alexander Rybak', 'alexander_rybak.jpg'),
-(6, 'Charlie Puth', 'charlie_puth.jpg'),
-(8, 'John Denver', 'john_denver.jpg'),
-(9, 'Weeknd', 'weeknd.jpg'),
-(10, 'Eminem', 'eminem.jpg');
+INSERT INTO `artists` (`Artist_ID`, `Artist_Name`, `Image`, `User_ID`, `status`) VALUES
+(1, 'Ed Sheeran', 'ed_sheeran.jpg', NULL, 'public'),
+(2, 'Taylor Swift', 'taylor_swift.jpg', NULL, 'public'),
+(3, 'Green Day', 'green_day.jpg', NULL, 'public'),
+(4, 'Bryan Adams', 'bryan_adams.jpg', NULL, 'public'),
+(5, 'Alexander Rybak', 'alexander_rybak.jpg', NULL, 'public'),
+(6, 'Charlie Puth', 'charlie_puth.jpg', NULL, 'public'),
+(8, 'John Denver', 'john_denver.jpg', NULL, 'public'),
+(9, 'Weeknd', 'weeknd.jpg', NULL, 'public'),
+(10, 'Eminem', 'eminem.jpg', NULL, 'public'),
+(11, 'Bijan', 'bijan.jpg', 1, 'private');
 
 -- --------------------------------------------------------
 
@@ -119,14 +122,7 @@ CREATE TABLE `likedsongs` (
 --
 
 INSERT INTO `likedsongs` (`User_ID`, `Song_ID`, `timestamp`) VALUES
-(1, 1, '2024-01-30 06:55:35'),
-(1, 2, '2024-01-30 06:47:15'),
-(1, 3, '2024-01-30 02:48:02'),
-(1, 10, '2024-01-30 07:12:39'),
-(2, 1, '2024-01-29 12:15:32'),
-(2, 2, '2024-01-28 12:32:02'),
-(2, 3, '2024-01-29 12:15:33'),
-(2, 4, '2024-01-18 04:20:11'),
+(1, 3, '2024-02-19 11:54:56'),
 (2, 5, '2024-01-29 12:15:34'),
 (2, 6, '2024-01-29 12:15:35'),
 (2, 7, '2024-01-29 12:15:36'),
@@ -151,9 +147,7 @@ CREATE TABLE `playlists` (
 
 INSERT INTO `playlists` (`Playlist_ID`, `User_ID`, `Playlist_Name`, `Created_Date`) VALUES
 (10, 2, 'myworld', '2024-01-09 09:04:41'),
-(11, 2, 'myPlaylist3', '2024-01-09 09:13:04'),
-(32, 1, 'myPlaylist', '2024-01-29 14:20:30'),
-(33, 1, 'meroPlaylist', '2024-01-29 14:37:09');
+(32, 1, 'myPlaylist', '2024-01-29 14:20:30');
 
 -- --------------------------------------------------------
 
@@ -184,25 +178,27 @@ CREATE TABLE `songs` (
   `Title` varchar(255) NOT NULL,
   `Artist_ID` int(11) DEFAULT NULL,
   `Album_ID` int(11) DEFAULT NULL,
-  `Genre_ID` int(11) DEFAULT NULL
+  `Genre_ID` int(11) DEFAULT NULL,
+  `User_ID` int(11) DEFAULT NULL,
+  `status` enum('public','private') DEFAULT 'public'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `songs`
 --
 
-INSERT INTO `songs` (`Song_ID`, `Title`, `Artist_ID`, `Album_ID`, `Genre_ID`) VALUES
-(1, 'Shape Of You', 1, 1, 1),
-(2, 'You Belong With Me', 2, 2, 1),
-(3, 'Fairy Tale', 5, 3, 12),
-(4, 'Summer Of 69', 4, 5, 2),
-(5, '21 Guns', 3, 4, 2),
-(6, 'See You Again', 6, 6, 1),
-(7, 'Love Story', 2, 2, 1),
-(8, 'Perfect', 1, 1, 1),
-(9, 'Country Roads', 8, 7, 5),
-(10, 'Save Your Tears', 9, 8, 6),
-(11, 'Mockingbird', 10, 9, 3);
+INSERT INTO `songs` (`Song_ID`, `Title`, `Artist_ID`, `Album_ID`, `Genre_ID`, `User_ID`, `status`) VALUES
+(1, 'Shape Of You', 1, 1, 1, NULL, 'public'),
+(2, 'You Belong With Me', 2, 2, 1, NULL, 'public'),
+(3, 'Fairy Tale', 5, 3, 12, NULL, 'public'),
+(4, 'Summer Of 69', 4, 5, 2, NULL, 'public'),
+(5, '21 Guns', 3, 4, 2, NULL, 'public'),
+(6, 'See You Again', 6, 6, 1, NULL, 'public'),
+(7, 'Love Story', 2, 2, 1, NULL, 'public'),
+(8, 'Perfect', 1, 1, 1, NULL, 'public'),
+(9, 'Country Roads', 8, 7, 5, NULL, 'public'),
+(10, 'Save Your Tears', 9, 8, 6, NULL, 'public'),
+(11, 'Mockingbird', 10, 9, 3, NULL, 'public');
 
 -- --------------------------------------------------------
 
@@ -236,14 +232,14 @@ INSERT INTO `users` (`User_ID`, `First_Name`, `Last_Name`, `Email`, `Password`, 
 --
 ALTER TABLE `albums`
   ADD PRIMARY KEY (`Album_ID`),
-  ADD KEY `Artist_ID` (`Artist_ID`),
-  ADD KEY `Genre_ID` (`Genre_ID`);
+  ADD KEY `Artist_ID` (`Artist_ID`);
 
 --
 -- Indexes for table `artists`
 --
 ALTER TABLE `artists`
-  ADD PRIMARY KEY (`Artist_ID`);
+  ADD PRIMARY KEY (`Artist_ID`),
+  ADD KEY `fk_artist_user` (`User_ID`);
 
 --
 -- Indexes for table `genres`
@@ -279,7 +275,8 @@ ALTER TABLE `songs`
   ADD PRIMARY KEY (`Song_ID`),
   ADD KEY `Artist_ID` (`Artist_ID`),
   ADD KEY `Album_ID` (`Album_ID`),
-  ADD KEY `Genre_ID` (`Genre_ID`);
+  ADD KEY `Genre_ID` (`Genre_ID`),
+  ADD KEY `fk_song_user` (`User_ID`);
 
 --
 -- Indexes for table `users`
@@ -295,13 +292,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `albums`
 --
 ALTER TABLE `albums`
-  MODIFY `Album_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Album_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `Artist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Artist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `genres`
@@ -313,19 +310,19 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `playlists`
 --
 ALTER TABLE `playlists`
-  MODIFY `Playlist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `Playlist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `Song_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Song_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -335,8 +332,13 @@ ALTER TABLE `users`
 -- Constraints for table `albums`
 --
 ALTER TABLE `albums`
-  ADD CONSTRAINT `albums_ibfk_1` FOREIGN KEY (`Artist_ID`) REFERENCES `artists` (`Artist_ID`),
-  ADD CONSTRAINT `albums_ibfk_2` FOREIGN KEY (`Genre_ID`) REFERENCES `genres` (`Genre_ID`);
+  ADD CONSTRAINT `albums_ibfk_1` FOREIGN KEY (`Artist_ID`) REFERENCES `artists` (`Artist_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `artists`
+--
+ALTER TABLE `artists`
+  ADD CONSTRAINT `fk_artist_user` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `likedsongs`
@@ -361,6 +363,7 @@ ALTER TABLE `playlist_songs`
 -- Constraints for table `songs`
 --
 ALTER TABLE `songs`
+  ADD CONSTRAINT `fk_song_user` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `songs_ibfk_1` FOREIGN KEY (`Artist_ID`) REFERENCES `artists` (`Artist_ID`),
   ADD CONSTRAINT `songs_ibfk_2` FOREIGN KEY (`Album_ID`) REFERENCES `albums` (`Album_ID`),
   ADD CONSTRAINT `songs_ibfk_3` FOREIGN KEY (`Genre_ID`) REFERENCES `genres` (`Genre_ID`);

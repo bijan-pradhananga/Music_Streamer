@@ -280,6 +280,60 @@ td .fa-trash:hover{
     box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }
 
+/* styling the edit profile page */
+.edit_profile-form{
+    width: 100%;
+    font-size: 22px;
+    display: flex;
+    background-color: #000000;
+    justify-content: center;
+}
+
+.edit_profile-form-part{
+    width: 70%;
+    display: flex;
+}
+
+.edit_profile-img-part{
+    width: 26%;
+}
+
+.edit_profile-img{
+    width: 17rem;
+    height: 17rem;
+    border-radius: 50%;
+    background-color: lightgray;
+    z-index: 3;
+    transform: translateY(-20%);
+    cursor: pointer;
+    position: relative;
+
+}
+
+.edit_profile-img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: 300ms ease-in-out;
+}
+
+.edit_profile-img i{
+    transition: 300ms ease-in-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+
+.edit_profile-img:hover img{
+    filter: brightness(70%);
+}
+
+.edit_profile-img:hover i{
+    display: block;
+}
+
 /* styling the genre box */
 .genre-box .box-content{
     position: relative;
@@ -344,11 +398,36 @@ table {
   td{
     cursor: pointer;
   }
-/* 
-  .tdImg{
-    width: 50px;
-    height: 50px;
-  } */
+
+/* styling the header of your songs section*/
+#your_songs-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+button{
+    cursor: pointer;
+}
+
+#your_songs-header .uploadBtn{
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #f6f6f6;
+    color: #1C1C1E;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    font-size: larger;
+    transition: 300ms ease-in-out;
+}
+
+#your_songs-header .uploadBtn:hover{
+    background-color: #284edb;
+    color: white;
+  
+}
+
 
 /* styling the bottombar which contains the music player */
 .bottombar {

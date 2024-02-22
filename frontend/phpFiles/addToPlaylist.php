@@ -7,7 +7,7 @@
             if ($query->checkPlaylistSong($_POST['Song_ID'],$_POST['Playlist_ID'])) {
                 echo "Failed";
             }else{
-                if($query->insert("playlist_songs",$_POST)){
+                if($query->insert("playlist_songs",$_POST,'')){
                     echo "Success";
                 }
             }

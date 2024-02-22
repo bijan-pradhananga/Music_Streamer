@@ -281,3 +281,71 @@ function deletePlaylistSong(event) {
             console.log(error);
         });
 }
+
+//to create an album
+function createAlbum() {
+    let formData = new FormData(albumForm);
+    fetch('phpFiles/createAlbum.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data.includes('success')) {
+            alert('album created');
+        }else{
+            console.log('error making album');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+//to get albums
+const getAlbums = () => {
+    fetch('phpFiles/userAlbums.php')
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (data) {
+            document.getElementById('albumOptions').innerHTML = data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+
+let albumForm = document.getElementById('createAlbumForm');
+albumForm.addEventListener('submit', (event)=> {
+    event.preventDefault();
+    createAlbum();
+    getAlbums()
+});
+
+
+//to upload song
+function uploadSong() {
+    let formData = new FormData(uploadSongForm);
+    // uploadSongForm.querySelectorAll('select').forEach(select => {
+    //     formData.append(select.name, select.value);
+    // });
+    fetch('phpFiles/uploadSong.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+let uploadSongForm = document.getElementById('uploadSongForm');
+uploadSongForm.addEventListener('submit',(event)=>{
+    event.preventDefault();
+    uploadSong();
+})

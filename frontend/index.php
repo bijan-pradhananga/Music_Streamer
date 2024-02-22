@@ -2,6 +2,7 @@
 include('../backend/query.php');
 $query = new dbQuery;
 $query->sessionCheck();
+$user = $query->fetchData("users", $_SESSION['id']);
 $genres = $query->display("genres");
 $artists = $query->display("artists");
 ?>
@@ -24,7 +25,7 @@ $artists = $query->display("artists");
 
 <body>
     <div class="container">
-        <div class="sidebar" id="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-contents">
                 <h1>MusicX</h1>
                 <div class="nav-sections">
@@ -48,13 +49,13 @@ $artists = $query->display("artists");
             <div class="logout-section">
                 <i class="fa-solid fa-right-from-bracket fa-fw"></i><a href="logout.php">Logout</a>
             </div>
-        </div>
-        <div class="contents">
+        </aside>
+        <main class="contents">
             <div class="topbar">
                 <div class="top-right-bar">
                     <div style="display:flex;">
                         <h2></h2>
-                        <h2>&nbsp;<?= $_SESSION['first_name'] ?> </h2>
+                        <h2>&nbsp;<?= $user[0]['First_Name'] ?> </h2>
                     </div>
                     <div class="search-bar" id="search-bar" style="display: none;">
                         <input type="text" id="main-search-bar" placeholder="Enter a song to search">
@@ -64,7 +65,7 @@ $artists = $query->display("artists");
                     </div>
                 </div>
                 <div class="profile" id="edit_profile-section" title="edit_profile-content" onclick="openDiv(this)">
-                    <img src="uploads/<?= $_SESSION['image'] ?>" alt="profile">
+                    <img src="uploads/<?= $user[0]['Image'] ?>" alt="profile">
                 </div>
             </div>
             <div class="main-content" style="color:white;">
@@ -76,7 +77,7 @@ $artists = $query->display("artists");
                             <a href="#song_nav">
                                 <div class="box-content">
                                     <div> <?php echo $genre['Genre_Name']; ?></div>
-                                    <img src="assets/genres/<?=$genre['Genre_Image'];?>" >
+                                    <img src="assets/genres/<?= $genre['Genre_Image']; ?>">
                                 </div>
                             </a>
                         <?php endforeach; ?>
@@ -133,8 +134,11 @@ $artists = $query->display("artists");
                     <div id='error-msg' style="display: none;"> No Songs Found </div>
                 </div>
                 <div id="your_songs-content" class="content-part" style="display: none;">
-                    <div class="content-header">
+                    <div class="content-header" id="your_songs-header">
                         <h1>Your Songs</h1>
+                        <div class="uploadBtn" id="uploadBtn" onclick="togglePopup(event)">
+                            <i id="uploadBtn" class="fa-solid fa-upload"></i>
+                        </div>
                     </div>
                     <table width="100%" cellpadding="25px" style="text-align:center; font-size:18px;">
                         <thead>
@@ -151,7 +155,7 @@ $artists = $query->display("artists");
                         </thead>
                         <tbody>
                         </tbody>
-                        
+
                     </table>
                     <div id='error-msg'> No Songs Found </div>
                 </div>
@@ -203,9 +207,43 @@ $artists = $query->display("artists");
                     <div class="content-header">
                         <h1>Your Profile</h1>
                     </div>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="edit_profile-form">
+                            <div class="edit_profile-form-part">
+                                <div>
+                                    <label for="first_name">First Name</label><br>
+                                    <label for="Last_name">Last Name</label><br>
+                                    <label for="email">Email</label><br>
+                                    <label for="password">Password</label><br>
+                                </div>
+                                <div>
+                                    <input type="text" name="first_name" value="<?= $user[0]['First_Name'] ?>"> <br>
+                                    <input type="text" name="Last_name" value="<?= $user[0]['Last_Name'] ?>"> <br>
+                                    <input type="email" name="email" value="<?= $user[0]['Email'] ?>"> <br>
+                                    <input type="password" name="password" value="<?= $user[0]['Password'] ?>"><br>
+                                    <button name="edit_btn">Save Changes</button>
+                                </div>
+                                <?php
+                                if (isset($_POST['edit_btn'])) {
+                                    unset($_POST['edit_btn']);
+                                    $query->edit("users", "User_ID", $_SESSION['id'], $_POST);
+                                }
+                                ?>
+                            </div>
+                            <div class="edit_profile-img-part">
+                                <label for="Image">
+                                    <div class="edit_profile-img">
+                                        <img src="uploads/<?= $user[0]['Image'] ?>">
+                                        <i class="fas fa-camera"></i>
+                                        <input type="file" name="Image" id="Image" style="display: none;">
+                                    </div>
+                                </label>
+
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-
             <div class="bottombar">
                 <div class="music-player">
                     <audio id="audio" style="display: none;"></audio>
@@ -240,7 +278,7 @@ $artists = $query->display("artists");
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
     <!-- for the popup  -->
     <div class="popup">
@@ -267,6 +305,55 @@ $artists = $query->display("artists");
                     <button id="addToPlaylistFormBtn">Add</button>
                 </form>
                 <p>Make your playlist more magical</p>
+            </div>
+            <div class="main-popup-content" id="uploadSong-form">
+                <!-- if he/she is an artist  -->
+                <?php if ($query->checkArtist($_SESSION['id'])) {
+                    $artistId = $query->getArtistId($_SESSION['id']); ?>
+                    <h2>Upload a Song</h2>
+                    <form id="createAlbumForm" action="" method="post">
+                        Create Album:
+                        <input type="text" name="Title" placeholder="Enter Your Album Name">
+                        <input type="hidden" name="Artist_ID" value="<?= $artistId ?>">
+                        <button>Create</button>
+                    </form>
+                    <form id="uploadSongForm" action="" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
+                        <input type="hidden" name="Artist_ID" value="<?= $artistId ?>">
+                        Title: <input type="text" name="Title" placeholder="Enter your song title"> <br>
+                        Genre: <select name="Genre_ID">
+                            <?php foreach ($genres as $genre) : ?>
+                                <option value="<?=$genre['Genre_ID'] ?>"><?= $genre['Genre_Name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php ?>
+                        Album: <select name="Album_ID" id="albumOptions">
+
+                        </select>
+                        Song: <input type="file" name="audio">
+                        <br>
+                        <button name="uploadSongBtn">Upload</button>
+                    </form>
+                <?php } else { ?>
+                    <form id="registerArtistForm" method="post" enctype="multipart/form-data">
+                        <h2>Register as artist</h2>
+                        Name <input type="text" name="Artist_Name" placeholder="Enter Your Artist Name"><br>
+                        Image <input type="file" name="image" id="image"><br>
+                        <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
+                        Status <select name="status" id="">
+                            <option value="private" selected>Private</option>
+                            <option value="public">public</option>
+                        </select>
+                        <button name="registerArtist_btn">Submit</button>
+                    </form>
+                <?php } ?>
+                <?php
+
+                if (isset($_POST['registerArtist_btn'])) {
+                    unset($_POST['registerArtist_btn']);
+                    $query->insert("artists", $_POST, "assets/artists");
+                }
+                ?>
             </div>
         </div>
     </div>

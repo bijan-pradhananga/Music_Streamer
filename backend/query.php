@@ -12,14 +12,14 @@ class dbQuery extends Database
         move_uploaded_file($tmp, $path . $image);
     }
 
-    function insertAudio($title)
+    function insertAudio($title, $loc)
     {
         $audio = $title . ".mp3"; // Use the title as the filename
         $tmp = $_FILES['audio']['tmp_name'];
-        $path = '../frontend/assets/songs/';
+        $path = $loc.'/';
         move_uploaded_file($tmp, $path . $audio);
     }
-    
+
 
     function insert($table, $tableData, $loc)
     {
@@ -35,8 +35,7 @@ class dbQuery extends Database
         // If there is an audio file in the form
         if (isset($_FILES['audio']) && $_FILES['audio']['error'] == UPLOAD_ERR_OK) {
             // Pass the title from the form to the insertAudio function
-            $this->insertAudio($_POST['Title']);
-    
+            $this->insertAudio($_POST['Title'],$loc);
         }
         $sql = "INSERT INTO $table ($key) VALUES ('$values')";
         $result = $this->conn->query($sql);
@@ -85,9 +84,9 @@ class dbQuery extends Database
         }
     }
 
-    function deleteImg($imageFile)
+    function deleteImg($imageFile,$loc)
     {
-        unlink("uploads/" . $imageFile);
+        unlink($loc."/" . $imageFile);
     }
 
     function fetchData($table, $id)
@@ -103,7 +102,7 @@ class dbQuery extends Database
     }
 
 
-    function edit($table, $id, $idVal, $tableData)
+    function edit($table, $id, $idVal, $tableData,$loc)
     {
         $keys = array_keys($tableData);
         $values = array_values($tableData);
@@ -112,12 +111,17 @@ class dbQuery extends Database
             $data[] = "{$keys[$i]}='{$values[$i]}' ";
         }
         $dataString = implode(',', $data); // it gives result -> name='$name' ,age='$age' ,address='$address'
-        $sql = "UPDATE $table SET $dataString  WHERE $id = '$idVal'";
+        // If there is an image in the form
+        if (isset($_FILES['image']) && $loc != '' && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+            $dataString .= ",Image='".$_FILES['image']['name']."'";
+            $user = $this->fetchData($table,$id);
+            $userImg = $user[0]['Image'];
+            // Call the insertImg function to handle image upload
+            $this->insertImg($_FILES['image']['name'], $loc);
+            $this->deleteImg($userImg, $loc);
+        }
+        $sql = "UPDATE $table SET $dataString  WHERE $id = $idVal";
         $result = $this->conn->query($sql);
-        // if($result){
-        //     echo "Data updated successfully";
-        //     echo '<br>Go back to <a href="display.php">table</a>';
-        // }
     }
 
     function search($searchData)

@@ -4,9 +4,7 @@
     $query->sessionCheck();
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!empty($_POST)) {
-            if ($query->insert("songs",$_POST,'../assets/songs')) {
-                echo "success";
-            } 
+            $query->edit("users", "User_ID", $_SESSION['id'], $_POST,'../uploads');
         }
     }
 ?>

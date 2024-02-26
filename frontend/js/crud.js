@@ -282,6 +282,20 @@ function deletePlaylistSong(event) {
         });
 }
 
+//to edit profile
+document.getElementById('profileEditForm').addEventListener('submit',(event)=>{
+    event.preventDefault();
+    let formData = new FormData(document.getElementById('profileEditForm'));
+    fetch('phpFiles/editProfile.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    })
+})
+
 //to create an album
 function createAlbum() {
     let formData = new FormData(albumForm);
@@ -334,9 +348,9 @@ function uploadSong() {
     })
     .then(response => response.text())
     .then(data => {
-       
-           console.log(data);
-    
+        if (data.includes('success')) {
+            console.log('uploaded');
+        }
     })
     .catch(error => {
         console.error('Error:', error);
@@ -348,3 +362,4 @@ uploadSongForm.addEventListener('submit',(event)=>{
     event.preventDefault();
     uploadSong();
 })
+

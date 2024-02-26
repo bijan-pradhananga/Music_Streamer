@@ -290,9 +290,16 @@ document.getElementById('profileEditForm').addEventListener('submit',(event)=>{
         method: 'POST',
         body: formData
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        console.log(data);
+    if (data.status === 'success') {
+        // Reload the page after successful edit
+        alert('Profile Updated')
+        window.location.reload();
+    } else {
+        // Handle error scenario if needed
+        alert('Edit operation failed.');
+    }
     })
 })
 
@@ -346,10 +353,13 @@ function uploadSong() {
         method: 'POST',
         body: formData,
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        if (data.includes('success')) {
-            console.log('uploaded');
+        if (data.status === 'success') {
+            alert('Song Uploaded');
+            displaySongs()
+        } else {
+            console.log('Error Uploading Song');
         }
     })
     .catch(error => {

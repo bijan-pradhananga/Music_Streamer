@@ -122,6 +122,11 @@ class dbQuery extends Database
         }
         $sql = "UPDATE $table SET $dataString  WHERE $id = $idVal";
         $result = $this->conn->query($sql);
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
     function search($searchData)

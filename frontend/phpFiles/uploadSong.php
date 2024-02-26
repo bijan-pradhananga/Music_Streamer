@@ -5,8 +5,10 @@
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!empty($_POST)) {
             if ($query->insert("songs",$_POST,'../assets/songs')) {
-                echo "success";
-            } 
+                echo json_encode(array("status" => "success"));
+            } else {
+                echo json_encode(array("status" => "error"));
+            }
         }
     }
 ?>

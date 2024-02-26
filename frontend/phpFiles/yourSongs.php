@@ -1,13 +1,13 @@
-<?php 
-    include('../../backend/query.php');
-    $query = new dbQuery;
-    $query->sessionCheck();
-    $sql = "SELECT Songs.Song_ID,Songs.Title AS SongTitle, Artists.Artist_Name AS ArtistName, Albums.Title AS AlbumTitle, Genres.Genre_Name AS GenreName, Artists.Image AS ArtistImage
+<?php
+include('../../backend/query.php');
+$query = new dbQuery;
+$query->sessionCheck();
+$sql = "SELECT Songs.Song_ID,Songs.User_ID,Songs.Title AS SongTitle, Artists.Artist_Name AS ArtistName, Albums.Title AS AlbumTitle, Genres.Genre_Name AS GenreName, Artists.Image AS ArtistImage
             FROM Songs JOIN Artists ON Songs.Artist_ID = Artists.Artist_ID 
             JOIN Albums ON Songs.Album_ID = Albums.Album_ID 
-            JOIN Genres ON Songs.Genre_ID = Genres.Genre_ID";
-    $songs = $query->displayJoin($sql);
-    $i=0; 
+            JOIN Genres ON Songs.Genre_ID = Genres.Genre_ID WHERE Songs.User_ID = " . $_SESSION['id'];
+$songs = $query->displayJoin($sql);
+$i = 0;
     if (!empty($songs)) {
     foreach($songs as $song) : 
     $likeDislikeStyle = $query->checkLikeDislike($song['Song_ID'], $_SESSION['id']) ? "color: #284edb;" : "color:white;";
@@ -27,6 +27,9 @@
         <span style="display:none;"><?=$song['Song_ID']?></span>
         <i class="fa-regular fa-square-plus"></i>
     </td>
+    <td>
+            <i class='fas fa-trash' id="<?= $song['Song_ID'] ?>" onclick="deleteYourSong(event)"></i>
+        </td>
 </tr>
 <?php 
     endforeach; 

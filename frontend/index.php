@@ -151,13 +151,14 @@ $artists = $query->display("artists");
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
 
                     </table>
-                    <div id='error-msg'> No Songs Found </div>
+                    <div id='error-msg' style="display: none;"> No Songs Found </div>
                 </div>
                 <div id="liked-content" class="content-part" style="display: none;">
                     <div class="content-header">
@@ -315,30 +316,37 @@ $artists = $query->display("artists");
                     <form id="uploadSongForm" action="" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
                         <input type="hidden" name="Artist_ID" value="<?= $artistId ?>">
-                        Title: <input type="text" name="Title" placeholder="Enter your song title"> <br>
-                        Genre: <select name="Genre_ID">
+                        Title <br>
+                        <input type="text" name="Title" placeholder="Enter your song title"> <br>
+                        Genre <br> 
+                        <select name="Genre_ID">
                             <?php foreach ($genres as $genre) : ?>
-                                <option value="<?=$genre['Genre_ID'] ?>"><?= $genre['Genre_Name'] ?></option>
+                                <option value="<?= $genre['Genre_ID'] ?>"><?= $genre['Genre_Name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                         <?php ?>
-                        Album: <select name="Album_ID" id="albumOptions">
+                        Album<br>
+                        <select name="Album_ID" id="albumOptions">
 
                         </select>
-                        Song: <input type="file" name="audio">
+                        Song <br>
+                        <input type="file" name="audio">
                         <br>
-                        <button name="uploadSongBtn">Upload</button>
+                        <button>Upload</button>
                     </form>
                 <?php } else { ?>
                     <form id="registerArtistForm" method="post" enctype="multipart/form-data">
                         <h2>Register as artist</h2>
-                        Name <input type="text" name="Artist_Name" placeholder="Enter Your Artist Name"><br>
-                        Image <input type="file" name="image" id="image"><br>
+                        <label for="Artist_Name">Name</label><br>
+                        <input type="text" name="Artist_Name" placeholder="Enter Your Artist Name"><br>
+                        <label for="image">Image</label><br>
+                        <input type="file" name="image" id="image"><br>
                         <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
-                        Status <select name="status" id="">
+                        <label for="status">Status</label><br>
+                        <select name="status" id="">
                             <option value="private" selected>Private</option>
                             <option value="public">public</option>
-                        </select>
+                        </select><br>
                         <button name="registerArtist_btn">Submit</button>
                     </form>
                 <?php } ?>

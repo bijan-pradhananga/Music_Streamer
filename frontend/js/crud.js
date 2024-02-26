@@ -345,6 +345,31 @@ albumForm.addEventListener('submit', (event)=> {
     getAlbums()
 });
 
+//to display your songs
+const displayYourSongs = () => {
+    fetch('phpFiles/yourSongs.php')
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (data) {
+            let yourSongsContent = document.getElementById('your_songs-content');
+            if (data.includes("No Songs Found")) {
+                yourSongsContent.querySelector('#error-msg').style.display = 'block';
+                yourSongsContent.querySelector('table tbody').innerHTML = '';
+            }else{
+                yourSongsContent.querySelector('#error-msg').style.display = 'none';
+                yourSongsContent.querySelector('table tbody').innerHTML = data;
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+document.getElementById('your_songs-section').addEventListener('click',()=>{
+    displayYourSongs();
+})
+
 
 //to upload song
 function uploadSong() {
@@ -357,7 +382,8 @@ function uploadSong() {
     .then(data => {
         if (data.status === 'success') {
             alert('Song Uploaded');
-            displaySongs()
+            displaySongs();
+            displayYourSongs();
         } else {
             console.log('Error Uploading Song');
         }
@@ -372,4 +398,31 @@ uploadSongForm.addEventListener('submit',(event)=>{
     event.preventDefault();
     uploadSong();
 })
+
+
+//function to delete own song
+function deleteYourSong(event) {
+    event.stopPropagation();
+    var confirm = window.confirm('Are you sure you want to delete?')
+    if (confirm) {
+    let songId = event.target.id;
+    var formData = new FormData();
+    formData.append('Song_ID', songId);
+    fetch('phpFiles/deleteYourSong.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (data) {
+            displayYourSongs();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+}
+
+
 

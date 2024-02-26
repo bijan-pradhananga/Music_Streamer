@@ -210,31 +210,35 @@ $artists = $query->display("artists");
                     </div>
                     <form id="profileEditForm" action="" method="post" enctype="multipart/form-data">
                         <div class="edit_profile-form">
-                            <div class="edit_profile-form-part">
-                                <div>
-                                    <label for="first_name">First Name</label><br>
-                                    <label for="Last_name">Last Name</label><br>
-                                    <label for="email">Email</label><br>
-                                    <label for="password">Password</label><br>
-                                </div>
-                                <div>
-                                    <input type="text" name="first_name" value="<?= $user[0]['First_Name'] ?>"> <br>
-                                    <input type="text" name="Last_name" value="<?= $user[0]['Last_Name'] ?>"> <br>
-                                    <input type="email" name="email" value="<?= $user[0]['Email'] ?>"> <br>
-                                    <input type="password" name="password" value="<?= $user[0]['Password'] ?>"><br>
-                                    <button>Save Changes</button>
-                                </div>
-
-                            </div>
                             <div class="edit_profile-img-part">
                                 <label for="Image">
-                                    <div class="edit_profile-img">
-                                        <img src="uploads/<?= $user[0]['Image'] ?>">
-                                        <i class="fas fa-camera"></i>
-                                        <input type="file" name="image" id="Image" style="display: none;">
+                                    <div style="display: flex; align-items:center;">
+                                        <div class="edit_profile-img">
+                                            <img src="uploads/<?= $user[0]['Image'] ?>">
+                                            <i class="fas fa-camera"></i>
+                                        </div>
+                                        <div style="font-size: 18px; margin-left:1rem;">
+                                        <?php echo $user[0]['First_Name']; ?> <br> <?php echo $user[0]['Last_Name']; ?>
+                                        </div>
                                     </div>
-                                </label>
 
+                                    <div class="edit_profile-img-btn">
+                                        Change Photo
+                                    </div>
+                                    <input type="file" name="image" id="Image" style="display: none;">
+                                </label>
+                                
+                            </div>
+                            <div class="edit_profile-form-part">
+                                    <label for="first_name">First Name</label><br>
+                                    <input type="text" name="first_name" value="<?= $user[0]['First_Name'] ?>"> <br>
+                                    <label for="Last_name">Last Name</label><br>
+                                    <input type="text" name="Last_name" value="<?= $user[0]['Last_Name'] ?>"> <br>
+                                    <label for="email">Email</label><br>
+                                    <input type="email" name="email" value="<?= $user[0]['Email'] ?>"> <br>
+                                    <label for="password">Password</label><br>
+                                    <input type="password" name="password" value="<?= $user[0]['Password'] ?>"><br>
+                                    <button>Save Changes</button>
                             </div>
                         </div>
                     </form>

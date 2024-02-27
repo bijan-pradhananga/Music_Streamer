@@ -337,13 +337,17 @@ const getAlbums = () => {
         });
 }
 
+let albumForm = null; // Initialize albumForm to null
 
-let albumForm = document.getElementById('createAlbumForm');
-albumForm.addEventListener('submit', (event)=> {
-    event.preventDefault();
-    createAlbum();
-    getAlbums()
-});
+// Check if the element with ID 'createAlbumForm' exists
+if (document.getElementById('createAlbumForm')) {
+    albumForm = document.getElementById('createAlbumForm'); // Assign the element to albumForm
+    albumForm.addEventListener('submit', (event)=> {
+        event.preventDefault();
+        createAlbum();
+        getAlbums()
+    });
+}
 
 //to display your songs
 const displayYourSongs = () => {
@@ -372,6 +376,37 @@ document.getElementById('your_songs-section').addEventListener('click',()=>{
 
 
 //to upload song
+function registerArtist() {
+    let formData = new FormData(registerArtistForm);
+    fetch('phpFiles/registerArtist.php', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Registered as artist');
+            window.location.reload();
+        } else {
+            console.log('Error Uploading Song');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+let registerArtistForm = null;
+if (document.getElementById('registerArtistForm')) {
+    registerArtistForm=document.getElementById('registerArtistForm');
+    registerArtistForm.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        registerArtist();
+    })
+}
+
+
+//to upload song
 function uploadSong() {
     let formData = new FormData(uploadSongForm);
     fetch('phpFiles/uploadSong.php', {
@@ -393,12 +428,14 @@ function uploadSong() {
     });
 }
 
-let uploadSongForm = document.getElementById('uploadSongForm');
-uploadSongForm.addEventListener('submit',(event)=>{
-    event.preventDefault();
-    uploadSong();
-})
-
+let uploadSongForm = null;
+if (document.getElementById('uploadSongForm')) {
+    uploadSongForm = document.getElementById('uploadSongForm');
+    uploadSongForm.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        uploadSong();
+    })
+} 
 
 //function to delete own song
 function deleteYourSong(event) {

@@ -204,11 +204,11 @@ $artists = $query->display("artists");
                     </table>
                     <div id='error-msg' style="display: none;">You haven't added any songs to your playlist yet </div>
                 </div>
-                <div id="edit_profile-content" class="content-part" style="display: none;">
-                    <div class="content-header">
+                <div id="edit_profile-content" class="content-part" style="display: none; background-color:black;">
+                    <div class="content-header" style="z-index: 10;">
                         <h1>Your Profile</h1>
                     </div>
-                    <form id="profileEditForm" action="" method="post" enctype="multipart/form-data">
+                    <form id="profileEditForm" class="editForm" action="" method="post" enctype="multipart/form-data">
                         <div class="edit_profile-form">
                             <div class="edit_profile-img-part">
                                 <label for="Image">
@@ -218,7 +218,7 @@ $artists = $query->display("artists");
                                             <i class="fas fa-camera"></i>
                                         </div>
                                         <div style="font-size: 18px; margin-left:1rem;">
-                                        <?php echo $user[0]['First_Name']; ?> <br> <?php echo $user[0]['Last_Name']; ?>
+                                            <?php echo $user[0]['First_Name']; ?> <br> <?php echo $user[0]['Last_Name']; ?>
                                         </div>
                                     </div>
 
@@ -227,21 +227,60 @@ $artists = $query->display("artists");
                                     </div>
                                     <input type="file" name="image" id="Image" style="display: none;">
                                 </label>
-                                
+
                             </div>
                             <div class="edit_profile-form-part">
-                                    <label for="first_name">First Name</label><br>
-                                    <input type="text" name="first_name" value="<?= $user[0]['First_Name'] ?>"> <br>
-                                    <label for="Last_name">Last Name</label><br>
-                                    <input type="text" name="Last_name" value="<?= $user[0]['Last_Name'] ?>"> <br>
-                                    <label for="email">Email</label><br>
-                                    <input type="email" name="email" value="<?= $user[0]['Email'] ?>"> <br>
-                                    <label for="password">Password</label><br>
-                                    <input type="password" name="password" value="<?= $user[0]['Password'] ?>"><br>
-                                    <button>Save Changes</button>
+                                <label for="first_name">First Name</label><br>
+                                <input type="text" name="first_name" value="<?= $user[0]['First_Name'] ?>"> <br>
+                                <label for="Last_name">Last Name</label><br>
+                                <input type="text" name="Last_name" value="<?= $user[0]['Last_Name'] ?>"> <br>
+                                <label for="email">Email</label><br>
+                                <input type="email" name="email" value="<?= $user[0]['Email'] ?>"> <br>
+                                <label for="password">Password</label><br>
+                                <input type="password" name="password" value="<?= $user[0]['Password'] ?>"><br>
+                                <button>Save Changes</button>
                             </div>
                         </div>
                     </form>
+                    <?php if ($query->checkArtist($_SESSION['id'])) {
+                        $artist = $query->fetchData("artists", $_SESSION['id']);
+                    ?>
+                        <div class="content-header" style="z-index: 10;">
+                            <h1>Artist Profile</h1>
+                        </div>
+                        <form id="editArtistProfile" class="editForm" action="" method="post" enctype="multipart/form-data">
+                            <div class="edit_profile-form" >
+                                <div class="edit_profile-img-part">
+                                    <label for="artistImage">
+                                        <div style="display: flex; align-items:center;">
+                                            <div class="edit_profile-img">
+                                                <img src="assets/artists/<?= $artist[0]['Image'] ?>">
+                                                <i class="fas fa-camera"></i>
+                                            </div>
+                                            <div style="font-size: 18px; margin-left:1rem;">
+                                                <?php echo $artist[0]['Artist_Name']; ?> <br>
+                                            </div>
+                                        </div>
+
+                                        <div class="edit_profile-img-btn">
+                                            Change Photo
+                                        </div>
+                                        <input type="file" name="image" id="artistImage" style="display: none;">
+                                    </label>
+                                </div>
+                                <div class="edit_profile-form-part">
+                                <label for="Artist_Name">Artist Name</label><br>
+                                <input type="text" name="Artist_Name" value="<?= $artist[0]['Artist_Name'] ?>"> <br>
+                                <label for="status">Status</label><br>
+                                <select name="status">
+                                    <option value="private" <?php if ($artist[0]['status']=='private') echo 'selected'  ?>>Private</option>
+                                    <option value="public" <?php if ($artist[0]['status']=='public') echo 'selected' ?>>Public</option>
+                                </select> <br>
+                                <button>Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    <?php } ?>
                 </div>
             </div>
             <div class="bottombar">
@@ -322,7 +361,7 @@ $artists = $query->display("artists");
                         <input type="hidden" name="Artist_ID" value="<?= $artistId ?>">
                         Title <br>
                         <input type="text" name="Title" placeholder="Enter your song title"> <br>
-                        Genre <br> 
+                        Genre <br>
                         <select name="Genre_ID">
                             <?php foreach ($genres as $genre) : ?>
                                 <option value="<?= $genre['Genre_ID'] ?>"><?= $genre['Genre_Name'] ?></option>

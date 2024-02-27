@@ -351,16 +351,9 @@ $artists = $query->display("artists");
                             <option value="private" selected>Private</option>
                             <option value="public">public</option>
                         </select><br>
-                        <button name="registerArtist_btn">Submit</button>
+                        <button>Submit</button>
                     </form>
                 <?php } ?>
-                <?php
-
-                if (isset($_POST['registerArtist_btn'])) {
-                    unset($_POST['registerArtist_btn']);
-                    $query->insert("artists", $_POST, "assets/artists");
-                }
-                ?>
             </div>
         </div>
     </div>

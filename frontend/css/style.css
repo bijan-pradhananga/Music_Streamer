@@ -325,7 +325,7 @@ td .fa-trash:hover{
     transition: 300ms ease-in-out;
 }
 
-.edit_profile-form-part input{
+.edit_profile-form-part input,.edit_profile-form-part select{
     width: 100%;
     height: 4.5vh;
     border-radius: 8px;

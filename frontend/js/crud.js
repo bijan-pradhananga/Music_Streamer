@@ -303,6 +303,30 @@ document.getElementById('profileEditForm').addEventListener('submit',(event)=>{
     })
 })
 
+//to edit artist profile
+if (document.getElementById('editArtistProfile')) {
+    document.getElementById('editArtistProfile').addEventListener('submit',(event)=>{
+        event.preventDefault();
+        let formData = new FormData(document.getElementById('editArtistProfile'));
+        fetch('phpFiles/editArtistProfile.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+        if (data.status === 'success') {
+            // Reload the page after successful edit
+            alert('Profile Updated')
+            window.location.reload();
+        } else {
+            // Handle error scenario if needed
+            alert('Edit operation failed.');
+        }
+        })
+    })
+}
+
+
 //to create an album
 function createAlbum() {
     let formData = new FormData(albumForm);

@@ -15,6 +15,7 @@ let totalTime = document.getElementById("totalTime");
 let volumeSlider = document.getElementById("volume-slider");
 let volumeIcon = document.getElementById("volume-icon");
 let progress_div = document.getElementById("progress-div");
+let downloadBtn = document.getElementById('music-player-download-btn');
 
 //to store the songs and the index of the current song
 let songsCollection = [];
@@ -27,10 +28,21 @@ let isPlaying = false;
 const loadSongs = (songs) => {
     musicPlayerTitle.innerText = songs.name;
     musicPlayerArtist.innerText = songs.artist;
+    downloadBtn.href = `assets/songs/${songs.name}.mp3`;
     music.src = `assets/songs/${songs.name}.mp3`;
     musicPlayerImg.src = `assets/artists/${songs.image}`;
     musicPlayerImg.style.display='block';
 }
+
+//function to check download
+downloadBtn.addEventListener('click', function(event) {
+    // Check if the href attribute is empty
+    if (this.getAttribute('href') === '') {
+        // Alert the user to select a song
+        alert('Please select a song to download.');
+        event.preventDefault();
+    }
+});
 
 //function to check if audio is empty or not
 const checkAudio = () => {

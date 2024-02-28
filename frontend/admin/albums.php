@@ -2,7 +2,9 @@
 <div class="container">
     <?php include('adminSidebar.php') ?>  
     <div class="contents">
-        <h1>Albums</h1>
+    <div class="inner-content">
+            <h1>Albums</h1>
+        </div>
     </div>  
 </div>
 <?php include('footer.php') ?>

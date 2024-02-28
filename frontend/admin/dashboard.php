@@ -1,8 +1,10 @@
 <?php include('header.php') ?>
-<div class="container">
+<main class="container">
     <?php include('adminSidebar.php') ?>  
     <div class="contents">
-        <h1>Dashboard</h1>
+        <div class="inner-content">
+            <h1>Dashboard</h1>
+        </div>
     </div>  
-</div>
+</main>
 <?php include('footer.php') ?>

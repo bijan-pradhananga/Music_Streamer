@@ -249,7 +249,7 @@ $artists = $query->display("artists");
                             <h1>Artist Profile</h1>
                         </div>
                         <form id="editArtistProfile" class="editForm" action="" method="post" enctype="multipart/form-data">
-                            <div class="edit_profile-form" >
+                            <div class="edit_profile-form">
                                 <div class="edit_profile-img-part">
                                     <label for="artistImage">
                                         <div style="display: flex; align-items:center;">
@@ -269,14 +269,14 @@ $artists = $query->display("artists");
                                     </label>
                                 </div>
                                 <div class="edit_profile-form-part">
-                                <label for="Artist_Name">Artist Name</label><br>
-                                <input type="text" name="Artist_Name" value="<?= $artist[0]['Artist_Name'] ?>"> <br>
-                                <label for="status">Status</label><br>
-                                <select name="status">
-                                    <option value="private" <?php if ($artist[0]['status']=='private') echo 'selected'  ?>>Private</option>
-                                    <option value="public" <?php if ($artist[0]['status']=='public') echo 'selected' ?>>Public</option>
-                                </select> <br>
-                                <button>Save Changes</button>
+                                    <label for="Artist_Name">Artist Name</label><br>
+                                    <input type="text" name="Artist_Name" value="<?= $artist[0]['Artist_Name'] ?>"> <br>
+                                    <label for="status">Status</label><br>
+                                    <select name="status">
+                                        <option value="private" <?php if ($artist[0]['status'] == 'private') echo 'selected'  ?>>Private</option>
+                                        <option value="public" <?php if ($artist[0]['status'] == 'public') echo 'selected' ?>>Public</option>
+                                    </select> <br>
+                                    <button>Save Changes</button>
                                 </div>
                             </div>
                         </form>
@@ -310,6 +310,9 @@ $artists = $query->display("artists");
                         </div>
                     </div>
                     <div class="music-player-slider">
+                        <a id="music-player-download-btn" download href="" style="display: <?= $user[0]['premium'] == 1 ? 'block' : 'none' ?>;">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
                         <div id="volume-container">
                             <i class="fa-solid fa-volume-low" id="volume-icon"></i>
                             <input type="range" id="volume-slider" min="0" max="100" value="50" step="1">

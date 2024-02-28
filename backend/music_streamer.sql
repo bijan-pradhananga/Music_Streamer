@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2024 at 03:09 PM
+-- Generation Time: Feb 28, 2024 at 12:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,8 +46,7 @@ INSERT INTO `albums` (`Album_ID`, `Title`, `Artist_ID`) VALUES
 (6, 'Most Wanted, Vol. 2', 6),
 (7, 'Prayers & Promises', 8),
 (8, 'After Hours', 9),
-(9, 'Encore', 10),
-(10, 'demoAlbum', 11);
+(9, 'Encore', 10);
 
 -- --------------------------------------------------------
 
@@ -76,8 +75,7 @@ INSERT INTO `artists` (`Artist_ID`, `Artist_Name`, `Image`, `User_ID`, `status`)
 (6, 'Charlie Puth', 'charlie_puth.jpg', NULL, 'public'),
 (8, 'John Denver', 'john_denver.jpg', NULL, 'public'),
 (9, 'Weeknd', 'weeknd.jpg', NULL, 'public'),
-(10, 'Eminem', 'eminem.jpg', NULL, 'public'),
-(11, 'Bijan', 'bijan.jpg', 1, 'private');
+(10, 'Eminem', 'eminem.jpg', NULL, 'public');
 
 -- --------------------------------------------------------
 
@@ -122,7 +120,9 @@ CREATE TABLE `likedsongs` (
 --
 
 INSERT INTO `likedsongs` (`User_ID`, `Song_ID`, `timestamp`) VALUES
+(1, 1, '2024-02-26 02:10:12'),
 (1, 3, '2024-02-19 11:54:56'),
+(1, 10, '2024-02-26 02:42:23'),
 (2, 5, '2024-01-29 12:15:34'),
 (2, 6, '2024-01-29 12:15:35'),
 (2, 7, '2024-01-29 12:15:36'),
@@ -212,16 +212,17 @@ CREATE TABLE `users` (
   `Last_Name` varchar(255) DEFAULT NULL,
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
-  `Image` varchar(255) DEFAULT NULL
+  `Image` varchar(255) DEFAULT NULL,
+  `premium` enum('0','1') DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`User_ID`, `First_Name`, `Last_Name`, `Email`, `Password`, `Image`) VALUES
-(1, 'Bijan', 'Pradhananga', 'bijan@gmail.com', 'bijan123', 'bijan.jpg'),
-(2, 'Elizabeth', 'Oslen', 'elizabeth@gmail.com', 'eliza123', 'elizabeth.jpg');
+INSERT INTO `users` (`User_ID`, `First_Name`, `Last_Name`, `Email`, `Password`, `Image`, `premium`) VALUES
+(1, 'Bijan', 'Pradhananga', 'bijan@gmail.com', 'bijan123', 'bijan.jpg', '1'),
+(2, 'Elizabeth', 'Oslen', 'elizabeth@gmail.com', 'eliza123', 'elizabeth.jpg', '0');
 
 --
 -- Indexes for dumped tables
@@ -292,13 +293,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `albums`
 --
 ALTER TABLE `albums`
-  MODIFY `Album_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Album_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `artists`
 --
 ALTER TABLE `artists`
-  MODIFY `Artist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Artist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `genres`
@@ -310,19 +311,19 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `playlists`
 --
 ALTER TABLE `playlists`
-  MODIFY `Playlist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `Playlist_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `Song_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `Song_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

@@ -17,7 +17,7 @@
 
 .sidebar{
     width: 20%;
-    background-color: black;
+    background-color: #1c1c1e;
     height: 100vh;
     padding: 28px;
 
@@ -55,7 +55,7 @@ a{
 
 .contents{
     width: 80%;
-    background-color: #1c1c1e;
+    background-color: black;
     min-height: 100vh;
     padding: 20px;
 }
@@ -63,9 +63,45 @@ a{
 .inner-content{
     width: 100%;
     height: 100%;
-    background-color: black;
     border-radius: 5px;
     padding: 8px;
     overflow-y: auto;
     
+}
+
+/* dashboard page */
+.status-info{
+    margin-top: 3vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.status-info-members{
+    flex-basis: 0; /* Allow items to grow */
+    flex-grow: 1; 
+    height: 14vh;
+    border-radius: 10px;
+    background-color: #1c1c1e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding: 25px 40px;
+}
+
+.status-info-members i{
+    font-size: 35px;
+}
+
+.status-info-members-txt h3{
+    margin-bottom: 0.8vh;
+    font-weight: 400;
+    font-size: 22px;
+    color: gray;
+}
+
+.status-info-members-txt .count{
+    font-weight: bold;
 }

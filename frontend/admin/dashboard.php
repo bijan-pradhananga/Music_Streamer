@@ -3,7 +3,9 @@
     <?php include('adminSidebar.php') ?>
     <div class="contents">
         <div class="inner-content">
-            <h1>Welcome to Dashboard</h1>
+            <div class="content-header" style="background-color:#253662;">
+                <h1>Welcome to Dashboard</h1>
+            </div>  
             <div class="status-info">
                 <div class="status-info-members" id="users">
                     <div class="status-info-members-txt">

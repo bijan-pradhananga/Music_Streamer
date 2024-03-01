@@ -55,7 +55,7 @@ a{
 
 .contents{
     width: 80%;
-    background-color: black;
+    background-color: #0b0a0b;
     min-height: 100vh;
     padding: 20px;
 }
@@ -64,7 +64,8 @@ a{
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    padding: 8px;
+    padding: 10px;
+    padding-right: 20px;
     overflow-y: auto;
     
 }
@@ -105,3 +106,131 @@ a{
 .status-info-members-txt .count{
     font-weight: bold;
 }
+
+.content-header{
+    width: 100%;
+    height: 17vh;
+    border-radius: 10px;
+    background-color: #1c1c1e;
+    margin-bottom: 3vh;
+    display: flex;
+    padding: 25px;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+.content-header h2{
+    margin-bottom: 1vh;
+}
+
+.content-header-rightPart img{
+    width: 11rem;
+    height: 8.5rem;
+
+}
+
+.content-upper-body{
+    width: 100%;
+    height: 14.5vh;
+    border-radius: 10px;
+    background-color: #1c1c1e;
+    margin-bottom: 3vh;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-upper-body .searchBox{
+    width: 23rem;
+    height: 7vh; 
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.content-upper-body .searchBox form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+
+.content-upper-body .searchBox form input{
+    width: 90%;
+    height: 100%;
+    outline: none;
+    border: none;
+    padding: 0 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: inherit;
+}
+
+.content-upper-body .searchBox form input:focus{
+    border-color: white;
+    transition: 300ms ease;
+}
+
+.content-upper-body .searchBox form button{
+    width: 10%;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+
+.content-upper-body .addBtn{
+    width: 8rem;
+    height: 6vh;
+    border-radius: 5px;
+    background-color: #284edb;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.content-upper-body .addBtn:hover{
+    background-color: #0c38d6;
+    transition: 300ms ease-in-out;
+}
+
+.content-lower-body{
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* styling the table  */
+table {
+    border-collapse: collapse;
+    width: 100%;
+   
+  }
+
+  th, td {
+    padding: 20px; 
+    text-align: center;
+  }
+
+  tr{
+    background-color: #1c1c1e;
+  }
+
+  tr:hover{
+    transition: 300ms ease-in-out;
+    background-color: #161618;
+  }
+
+  th{
+    position: sticky; /* make the table heads sticky */
+    top: 0px;
+    background-color: #1c1c1e;
+  }
+
+  td{
+    cursor: pointer;
+  }

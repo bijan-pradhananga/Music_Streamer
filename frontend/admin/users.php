@@ -1,8 +1,12 @@
-<?php include('header.php') ?>
+<?php 
+include('header.php');
+$users = $query->display("users");
+?>
+
 <div class="container">
-    <?php include('adminSidebar.php') ?>  
+    <?php include('adminSidebar.php') ?>
     <div class="contents">
-    <div class="inner-content">
+        <div class="inner-content">
             <div class="content-header">
                 <div class="content-header-leftPart">
                     <h2>Users</h2>
@@ -19,7 +23,7 @@
                         <button><i class="fas fa-search"></i></button>
                     </form>
                 </div>
-                <div class="addBtn">Add users</div>
+                <div class="addBtn" onclick="togglePopup(event)">Add users</div>
             </div>
             <div class="content-lower-body">
                 <table>
@@ -30,20 +34,37 @@
                             <th>Last Name</th>
                             <th>Email</th>
                             <th>Password</th>
+                            <th>Image</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Bijan</td>
-                            <td>Pradhananga</td>
-                            <td>bijan@gmail.com</td>
-                            <td>bijan123</td>
-                        </tr>
+                        <?php $i=0; foreach ($users as $user) {?>
+                            <tr>
+                                <td><?=++$i?></td>
+                                <td><?=$user['First_Name']?></td>
+                                <td><?=$user['Last_Name']?></td>
+                                <td><?=$user['Email']?></td>
+                                <td><?=$user['Password']?></td>
+                                <td><img src="../uploads/<?=$user['Image']?>" width="50" height="50"></td>
+                                <td><a href="userDelete.php">Delete</a> <a href="userEdit.php" >Edit</a></td>
+                            </tr>
+                        <?php } ?>
+
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
+<!-- for popup -->
+<div class="popup">
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="close-btn" id="close-btn" onclick="togglePopup(event)">&times;</div>
+            <br>
+        <h2>User Form</h2>
+    </div>
+</div>
+<script src="../js/adminPopup.js"></script>
 <?php include('footer.php') ?>

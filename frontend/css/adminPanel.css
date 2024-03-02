@@ -234,3 +234,28 @@ table {
   td{
     cursor: pointer;
   }
+
+  /* styling action btns */
+  .actionSection{
+    display: flex;
+    justify-content: center;
+  }
+
+  .actionBtns{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    margin: 0 5px;
+    display: grid;
+    place-items: center;
+    background-color: red;
+  }
+
+  .actionSection #actionEdit{
+    background-color: green;
+  }
+
+  .actionBtns:hover {
+    transition: 300ms ease;
+    filter: brightness(90%); /* Darkens the button on hover */
+}

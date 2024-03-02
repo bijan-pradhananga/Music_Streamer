@@ -73,9 +73,9 @@ class dbQuery extends Database
         }
     }
 
-    function delete($table, $idName, $id)
+    function delete($table, $id, $idVal)
     {
-        $sql = "DELETE FROM $table WHERE $idName=$id";
+        $sql = "DELETE FROM $table WHERE $id=$idVal";
         $result = $this->conn->query($sql);
         if ($result) {
             return true;
@@ -89,9 +89,9 @@ class dbQuery extends Database
         unlink($loc."/" . $imageFile);
     }
 
-    function fetchData($table, $id)
+    function fetchData($table, $id,$idVal)
     {
-        $sql = "SELECT * FROM $table WHERE User_ID = $id";
+        $sql = "SELECT * FROM $table WHERE $id = $idVal";
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -114,7 +114,7 @@ class dbQuery extends Database
         // If there is an image in the form
         if (isset($_FILES['image']) && $loc != '' && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
             $dataString .= ",Image='".$_FILES['image']['name']."'";
-            $user = $this->fetchData($table,$id);
+            $user = $this->fetchData($table,$id,$idVal);
             $userImg = $user[0]['Image'];
             // Call the insertImg function to handle image upload
             $this->insertImg($_FILES['image']['name'], $loc);

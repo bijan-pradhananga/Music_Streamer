@@ -1,8 +1,13 @@
-<?php include('header.php') ?>
+<?php
+    include('header.php');
+    $artists = $query->display("artists");
+
+?>
+
 <div class="container">
-    <?php include('adminSidebar.php') ?>  
+    <?php include('adminSidebar.php') ?>
     <div class="contents">
-    <div class="inner-content">
+        <div class="inner-content">
             <div class="content-header">
                 <div class="content-header-leftPart">
                     <h2>Artists</h2>
@@ -19,31 +24,41 @@
                         <button><i class="fas fa-search"></i></button>
                     </form>
                 </div>
-                <div class="addBtn">Add artists</div>
+                <div class="addBtn" onclick="togglePopup(event)">Add artists</div>
             </div>
             <div class="content-lower-body">
                 <table>
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Password</th>
+                            <th>Artist Name</th>
+                            <th>Image</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Bijan</td>
-                            <td>Pradhananga</td>
-                            <td>bijan@gmail.com</td>
-                            <td>bijan123</td>
-                        </tr>
+                    <?php $i=0; foreach ($artists as $artist) {?>
+                            <tr>
+                                <td><?=++$i?></td>
+                                <td><?=$artist['Artist_Name']?></td>
+                                <td><img src="../assets/artists/<?=$artist['Image']?>" width="50" height="50"></td>
+                                <td><a href="artistDelete.php">Delete</a> <a href="artistEdit.php">Edit</a></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
+<!-- for popup -->
+<div class="popup">
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="close-btn" id="close-btn" onclick="togglePopup(event)">&times;</div>
+            <br>
+        <h2>Artist Form</h2>
+    </div>
+</div>
+<script src="../js/adminPopup.js"></script>
 <?php include('footer.php') ?>

@@ -19,7 +19,7 @@
                         <button><i class="fas fa-search"></i></button>
                     </form>
                 </div>
-                <div class="addBtn">Add albums</div>
+                <div class="addBtn" onclick="togglePopup(event)">Add albums</div>
             </div>
             <div class="content-lower-body">
                 <table>
@@ -46,4 +46,14 @@
         </div>
     </div>  
 </div>
+<!-- for popup -->
+<div class="popup">
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="close-btn" id="close-btn" onclick="togglePopup(event)">&times;</div>
+            <br>
+        <h2>Album Form</h2>
+    </div>
+</div>
+<script src="../js/adminPopup.js"></script>
 <?php include('footer.php') ?>

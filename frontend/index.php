@@ -2,7 +2,7 @@
 include('../backend/query.php');
 $query = new dbQuery;
 $query->sessionCheck();
-$user = $query->fetchData("users", $_SESSION['id']);
+$user = $query->fetchData("users", "User_ID",$_SESSION['id']);
 $genres = $query->display("genres");
 $artists = $query->display("artists");
 ?>
@@ -77,7 +77,7 @@ $artists = $query->display("artists");
                             <a href="#song_nav">
                                 <div class="box-content">
                                     <div> <?php echo $genre['Genre_Name']; ?></div>
-                                    <img src="assets/genres/<?= $genre['Genre_Image']; ?>">
+                                    <img src="assets/genres/<?= $genre['Image']; ?>">
                                 </div>
                             </a>
                         <?php endforeach; ?>
@@ -243,7 +243,7 @@ $artists = $query->display("artists");
                         </div>
                     </form>
                     <?php if ($query->checkArtist($_SESSION['id'])) {
-                        $artist = $query->fetchData("artists", $_SESSION['id']);
+                        $artist = $query->fetchData("artists", "Artist_ID", $_SESSION['id']);
                     ?>
                         <div class="content-header" style="z-index: 10;">
                             <h1>Artist Profile</h1>

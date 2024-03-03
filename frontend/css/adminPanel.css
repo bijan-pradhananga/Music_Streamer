@@ -226,7 +226,6 @@ a{
 table {
     border-collapse: collapse;
     width: 100%;
-   
   }
 
   th, td {
@@ -244,8 +243,6 @@ table {
   }
 
   th{
-    position: sticky; /* make the table heads sticky */
-    top: 0px;
     background-color: #1c1c1e;
   }
 

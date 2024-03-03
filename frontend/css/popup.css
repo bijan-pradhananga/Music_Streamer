@@ -104,7 +104,7 @@
     margin-bottom: 1vh;
 }
 
-#registerForm input{
+#registerForm input,#registerForm select,#registerForm option{
     color: black;
 }
 

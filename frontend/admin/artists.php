@@ -1,7 +1,6 @@
 <?php
     include('header.php');
     $artists = $query->display("artists");
-
 ?>
 
 <div class="container">
@@ -42,7 +41,14 @@
                                 <td><?=++$i?></td>
                                 <td><?=$artist['Artist_Name']?></td>
                                 <td><img src="../assets/artists/<?=$artist['Image']?>" width="50" height="50"></td>
-                                <td><a href="artistDelete.php">Delete</a> <a href="artistEdit.php">Edit</a></td>
+                                <td class="actionSection">
+                                    <a href="artistDelete.php?id=<?=$artist['Artist_ID']?>">
+                                        <div class="actionBtns"><i class="fas fa-trash"></i></div>
+                                    </a> 
+                                    <a href="artists.php?id=<?=$artist['Artist_ID']?>">
+                                        <div class="actionBtns" id="actionEdit"><i class="fas fa-edit"></i></div>
+                                    </a>
+                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -52,12 +58,46 @@
     </div>
 </div>
 <!-- for popup -->
-<div class="popup">
+<div class="popup<?php echo isset($_GET['id']) ? ' active' : ''; ?>">
     <div class="overlay"></div>
     <div class="content">
-        <div class="close-btn" id="close-btn" onclick="togglePopup(event)">&times;</div>
-            <br>
-        <h2>Artist Form</h2>
+        <a href="artists.php"><div class="close-btn" id="close-btn" onclick="togglePopup(event)">&times;</div></a>
+        <br>
+        <div class="main-popup-content" >
+            <h2>Artist Form</h2>
+            <form  action="" id="registerForm" method="post" enctype="multipart/form-data">
+                <?php if (isset($_GET['id'])) { 
+                    $edit = $query->fetchData("artists", "Artist_ID",$_GET['id']);
+                ?>
+                    <input type="hidden" name="Artist_ID" value="<?=$_GET['id']?>">
+                    
+                <?php } ?>
+                <label for="Artist_Name">Artist Name</label><br>
+                <input type="text" name="Artist_Name" placeholder="Enter Your artist Name" value="<?= isset($_GET['id']) ? $edit[0]['Artist_Name'] : '' ?>"><br>
+                <label for="status">Status</label><br>
+                <select name="status">
+                    <option value="private" <?= isset($_GET['id']) && $edit[0]['status']=='private' ? 'selected' : '' ?>>Private</option>
+                    <option value="public" <?= isset($_GET['id']) && $edit[0]['status']=='public' ? 'selected' : '' ?>>Public</option>
+                </select>
+                <label for="image">Image</label><br>
+                <input type="file" name="image" id="image"><br>
+                <button name="addArtist">Submit</button>
+            </form>
+        </div>
+    <?php 
+        if (isset($_POST['addArtist'])) {
+            unset($_POST['addArtist']);
+            if (isset($_POST['Artist_ID'])) {
+                if ($query->edit("artists", "Artist_ID", $_GET['id'], $_POST,"../assets/artists")) {
+                    echo "edited";
+                } 
+            } else {
+                if ($query->insert("artists", $_POST, "../assets/artists")) {
+                    echo "inserted";
+                } 
+            }
+        }
+    ?>
     </div>
 </div>
 <script src="../js/adminPopup.js"></script>

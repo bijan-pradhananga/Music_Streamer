@@ -169,6 +169,17 @@ class dbQuery extends Database
         }
     }
 
+    function searchf($table,$searchType,$value){
+        $sql = "SELECT * FROM $table WHERE $searchType LIKE '%$value%'";
+        $result = $this->conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
+
 
     function login($table, $email, $password)
     {

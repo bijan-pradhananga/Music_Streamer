@@ -19,14 +19,52 @@
             <div class="content-upper-body">
                 <div class="searchBox">
                     <form action="" method="get">
-                        <input type="text" placeholder="Enter something to search">
+                        <input type="text"
+                        name="search"
+                        value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>"
+                        placeholder="Enter something to search">
                         <button><i class="fas fa-search"></i></button>
                     </form>
                 </div>
                 <div class="addBtn" onclick="togglePopup(event)">Add artists</div>
             </div>
             <div class="content-lower-body">
+            <?php 
+                if (isset($_GET['search'])) {
+                    $searches = $query->searchf("artists","Artist_Name",$_GET['search']);
+                    if (!empty($searches)){
+                ?>
                 <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Artist Name</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php $i=0; foreach ($searches as $search) {?>
+                            <tr>
+                                <td><?=++$i?></td>
+                                <td><?=$search['Artist_Name']?></td>
+                                <td><img src="../assets/artists/<?=$search['Image']?>" width="50" height="50"></td>
+                                <td class="actionSection">
+                                    <a href="artistDelete.php?id=<?=$search['Artist_ID']?>">
+                                        <div class="actionBtns"><i class="fas fa-trash"></i></div>
+                                    </a> 
+                                    <a href="artists.php?id=<?=$search['Artist_ID']?>">
+                                        <div class="actionBtns" id="actionEdit"><i class="fas fa-edit"></i></div>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <?php } else echo "No Data Found"; 
+                    }else{
+                ?>
+                               <table>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -53,6 +91,7 @@
                         <?php } ?>
                     </tbody>
                 </table>
+                <?php } ?>
             </div>
         </div>
     </div>

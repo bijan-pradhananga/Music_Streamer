@@ -22,14 +22,59 @@ $songs = $query->displayJoin($sql);
             <div class="content-upper-body">
                 <div class="searchBox">
                     <form action="" method="get">
-                        <input type="text" placeholder="Enter something to search">
+                        <input type="text" 
+                        name="search"
+                        value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>"
+                        placeholder="Enter something to search">
                         <button><i class="fas fa-search"></i></button>
                     </form>
                 </div>
                 <div class="addBtn" onclick="togglePopup(event)">Add Songs</div>
             </div>
             <div class="content-lower-body">
+            <?php 
+                if (isset($_GET['search'])) {
+                    $searchWord = $_GET['search'];
+                    $searches = $query->displayJoin($sql.' WHERE Songs.Title LIKE "%'.$searchWord.'%"');
+                    if (!empty($searches)){
+                ?>
                 <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Artist</th>
+                            <th>Genre</th>
+                            <th>Album</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php $i=0; foreach($searches as $search) :  ?>
+                        <tr>
+                            <td><?= ++$i ?></td>
+                            <td><?= $search['SongTitle'] ?></td>
+                            <td><?= $search['ArtistName'] ?></td>
+                            <td><?= $search['GenreName'] ?></td>
+                            <td><?= $search['AlbumTitle'] ?></td>
+                            <td><img src="../assets/artists/<?= $search['ArtistImage'] ?>" alt="image" style="width:50px; height:50px;"></td>
+                            <td class="actionSection">
+                                    <a href="songDelete.php?id=<?=$search['Song_ID']?>">
+                                        <div class="actionBtns"><i class="fas fa-trash"></i></div>
+                                    </a> 
+                                    <a href="songs.php?id=<?=$search['Song_ID']?>">
+                                        <div class="actionBtns" id="actionEdit"><i class="fas fa-edit"></i></div>
+                                    </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php } else echo "No Data Found"; 
+                    }else{
+                ?>
+                                <table>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -62,6 +107,7 @@ $songs = $query->displayJoin($sql);
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php } ?>
             </div>
         </div>
     </div>

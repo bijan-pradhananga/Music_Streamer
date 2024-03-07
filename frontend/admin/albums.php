@@ -1,6 +1,7 @@
 <?php 
     include('header.php');
-    $albums =$query->displayJoin('SELECT albums.* , artists.Artist_Name, artists.Image FROM albums INNER JOIN artists ON albums.Artist_ID=artists.Artist_ID;');
+    $sql= 'SELECT albums.* , artists.Artist_Name, artists.Image FROM albums INNER JOIN artists ON albums.Artist_ID=artists.Artist_ID';
+    $albums =$query->displayJoin($sql);
 ?>
 <div class="container">
     <?php include('adminSidebar.php') ?>  
@@ -18,14 +19,55 @@
             <div class="content-upper-body">
                 <div class="searchBox">
                     <form action="" method="get">
-                        <input type="text" placeholder="Enter something to search">
+                        <input type="text" 
+                        name="search"
+                        value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>"
+                        placeholder="Enter something to search">
                         <button><i class="fas fa-search"></i></button>
                     </form>
                 </div>
                 <div class="addBtn" onclick="togglePopup(event)">Add albums</div>
             </div>
             <div class="content-lower-body">
+            <?php 
+                if (isset($_GET['search'])) {
+                    $searchWord = $_GET['search'];
+                    $searches = $query->displayJoin($sql.' WHERE albums.Title LIKE "%'.$searchWord.'%"');
+                    if (!empty($searches)){
+                ?>
                 <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Album Name</th>
+                            <th>Artist</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php $i=0; foreach ($searches as $search) {?>
+                            <tr>
+                                <td><?=++$i?></td>
+                                <td><?=$search['Title']?></td>
+                                <td><?=$search['Artist_Name']?></td>
+                                <td><img src="../assets/artists/<?=$search['Image']?>" width="50" height="50"></td>
+                                <td class="actionSection">
+                                    <a href="albumDelete.php?id=<?=$search['Album_ID']?>">
+                                        <div class="actionBtns"><i class="fas fa-trash"></i></div>
+                                    </a> 
+                                    <a href="albums.php?id=<?=$search['Album_ID']?>">
+                                        <div class="actionBtns" id="actionEdit"><i class="fas fa-edit"></i></div>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <?php } else echo "No Data Found"; 
+                    }else{
+                ?>
+                                <table>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -54,6 +96,7 @@
                         <?php } ?>
                     </tbody>
                 </table>
+                <?php } ?>
             </div>
         </div>
     </div>  

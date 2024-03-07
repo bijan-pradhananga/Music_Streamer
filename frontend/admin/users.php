@@ -19,14 +19,61 @@ $users = $query->display("users");
             <div class="content-upper-body">
                 <div class="searchBox">
                     <form action="" method="get">
-                        <input type="text" placeholder="Enter something to search">
+                        <input type="text"
+                        name="search"
+                        value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>"
+                        placeholder="Enter something to search">
                         <button><i class="fas fa-search"></i></button>
                     </form>
                 </div>
                 <div class="addBtn" onclick="togglePopup(event)">Add users</div>
             </div>
             <div class="content-lower-body">
+            <?php 
+                if (isset($_GET['search'])) {
+                    $searches = $query->searchf("users","First_Name",$_GET['search']);
+                    if (!empty($searches)){
+                ?>
                 <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Type</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i=0; foreach ($searches as $search) {?>
+                            <tr>
+                                <td><?=++$i?></td>
+                                <td><?=$search['First_Name']?></td>
+                                <td><?=$search['Last_Name']?></td>
+                                <td><?=$search['Email']?></td>
+                                <td><?=$search['Password']?></td>
+                                <td><?=$search['premium']==1 ? 'premium' : 'non-premium'?></td>
+                                <td><img src="../uploads/<?=$search['Image']?>" width="50" height="50"></td>
+                                <td class="actionSection">
+                                    <a href="userDelete.php?id=<?=$search['User_ID']?>">
+                                        <div class="actionBtns"><i class="fas fa-trash"></i></div>
+                                    </a> 
+                                    <a href="users.php?id=<?=$search['User_ID']?>">
+                                        <div class="actionBtns" id="actionEdit"><i class="fas fa-edit"></i></div>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+
+                    </tbody>
+                </table>
+                <?php } else echo "No Data Found"; 
+                    }else{
+                ?>
+                    <table>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -62,6 +109,7 @@ $users = $query->display("users");
 
                     </tbody>
                 </table>
+                 <?php } ?>
             </div>
         </div>
     </div>
@@ -73,7 +121,7 @@ $users = $query->display("users");
         <a href="users.php"><div class="close-btn" id="close-btn" onclick="togglePopup(event)">&times;</div></a>
         <br>
         <div class="main-popup-content" >
-            <h2>user Form</h2>
+            <h2>User Form</h2>
             <form  action="" id="registerForm" method="post" enctype="multipart/form-data">
                 <?php if (isset($_GET['id'])) { 
                     $edit = $query->fetchData("users", "User_ID",$_GET['id']);

@@ -10,7 +10,7 @@
                 <div class="status-info-members" id="users">
                     <div class="status-info-members-txt">
                         <h3>Users</h3>
-                        <div class="count">10</div>
+                        <div class="count"><?=$query->countRows('users')?></div>
                     </div>
                     <div class="status-info-members-icon">
                         <i class="fas fa-user"></i>
@@ -19,7 +19,7 @@
                 <div class="status-info-members" id="artists">
                     <div class="status-info-members-txt">
                         <h3>Artists</h3>
-                        <div class="count">10</div>
+                        <div class="count"><?=$query->countRows('artists')?></div>
                     </div>
                     <div class="status-info-members-icon">
                         <i class="fas fa-microphone-alt"></i>
@@ -28,7 +28,7 @@
                 <div class="status-info-members" id="songs">
                     <div class="status-info-members-txt">
                         <h3>Songs</h3>
-                        <div class="count">10</div>
+                        <div class="count"><?=$query->countRows('songs')?></div>
                     </div>
                     <div class="status-info-members-icon">
                         <i class="fas fa-music"></i>
@@ -37,7 +37,7 @@
                 <div class="status-info-members" id="genres">
                     <div class="status-info-members-txt">
                         <h3>Genres</h3>
-                        <div class="count">10</div>
+                        <div class="count"><?=$query->countRows('genres')?></div>
                     </div>
                     <div class="status-info-members-icon">
                         <i class="far fa-play-circle"></i>

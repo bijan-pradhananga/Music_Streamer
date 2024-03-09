@@ -180,6 +180,12 @@ class dbQuery extends Database
         }
     }
 
+    function countRows($table){
+        $sql = "SELECT * FROM $table";
+        $result = $this->conn->query($sql);
+        return $result->num_rows;
+    }
+
 
     function login($table, $email, $password)
     {

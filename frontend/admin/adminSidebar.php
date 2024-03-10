@@ -4,7 +4,7 @@
     <h1>Admin Panel</h1>
     <ul>
         <li>
-            <a href="dashboard.php"><span><i class="fas fa-home"></i></span> <span>Dashboard</span> </a> 
+            <a href="index.php"><span><i class="fas fa-home"></i></span> <span>Dashboard</span> </a> 
         </li> <br>
         <li>
             <a href="songs.php"><span><i class="fas fa-music"></i></span> Songs</a> 
@@ -24,6 +24,6 @@
     </ul>
     </div>
   
-    <a href="#">Logout</a>
+    <a href="logout.php">Logout</a>
 </nav>
 </aside>

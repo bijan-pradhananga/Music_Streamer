@@ -10,7 +10,7 @@
 
 /* styling the scroll bar */
 ::-webkit-scrollbar {
-    width: 3.5px;
+    width: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -95,6 +95,7 @@ a{
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
+    margin-bottom: 3vh;
 }
 
 .status-info-members{
@@ -274,3 +275,61 @@ table {
     transition: 300ms ease;
     filter: brightness(90%); /* Darkens the button on hover */
 }
+
+/* styling the home contents */
+.home-content-box{
+    margin-top: 0.5rem;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.box-content{
+    width: 16.5rem;
+    height: 17.5rem;
+    margin:  0.8rem;
+    background-color: #1C1C1E;
+    padding: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+}
+
+/* styling the genre box */
+.genre-box .box-content{
+    position: relative;
+    font-weight: bold;
+}
+
+.genre-box .box-content div{
+    width: 100%;
+    padding: 10px;   
+}
+
+.genre-box .box-content img{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transform: rotate(25deg);
+}
+
+/* styling the artist box */
+.artist-box .box-content{
+    display: grid;
+    place-items: center;
+    padding: 3px;
+}
+
+.artist-box .box-content img{
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+}
+

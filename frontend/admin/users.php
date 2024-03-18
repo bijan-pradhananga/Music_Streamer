@@ -13,7 +13,7 @@ $users = $query->display("users");
                     <h4>Dashboard • Users</h4>
                 </div>
                 <div class="content-header-rightPart">
-                    <img src="../assets/adminImgs/songs.png" alt="">
+                    <img src="../assets/adminImgs/users.png" style="width:125px; height:125px;">
                 </div>
             </div>
             <div class="content-upper-body">

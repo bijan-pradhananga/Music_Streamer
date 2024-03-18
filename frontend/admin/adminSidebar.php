@@ -24,6 +24,6 @@
     </ul>
     </div>
   
-    <a href="logout.php">Logout</a>
+    <a href="logout.php"><span><i class="fas fa-sign-out-alt"></i></span> &nbsp; Logout</a>
 </nav>
 </aside>

@@ -13,7 +13,7 @@
                     <h4>Dashboard • Albums</h4>
                 </div>
                 <div class="content-header-rightPart">
-                    <img src="../assets/adminImgs/songs.png" alt="">
+                    <img src="../assets/adminImgs/album.png" style="width:100px; height:100px;">
                 </div>
             </div>
             <div class="content-upper-body">

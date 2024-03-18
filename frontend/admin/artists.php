@@ -13,7 +13,7 @@
                     <h4>Dashboard • Artists</h4>
                 </div>
                 <div class="content-header-rightPart">
-                    <img src="../assets/adminImgs/songs.png" alt="">
+                    <img src="../assets/adminImgs/artists.png" style="width:140px; height:120px;">
                 </div>
             </div>
             <div class="content-upper-body">

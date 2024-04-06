@@ -1,6 +1,19 @@
 <?php
     include('header.php');
     $artists = $query->display("artists");
+    
+    if (isset($_POST['addArtist'])) {
+        unset($_POST['addArtist']);
+        if (isset($_POST['Artist_ID'])) {
+            if ($query->edit("artists", "Artist_ID", $_GET['id'], $_POST,"../assets/artists")) {
+                header("location:artists.php");
+            } 
+        } else {
+            if ($query->insert("artists", $_POST, "../assets/artists")) {
+                header("location:artists.php");
+            } 
+        }
+    }
 ?>
 
 <div class="container">
@@ -112,31 +125,12 @@
                     
                 <?php } ?>
                 <label for="Artist_Name">Artist Name</label><br>
-                <input type="text" name="Artist_Name" placeholder="Enter Your artist Name" value="<?= isset($_GET['id']) ? $edit[0]['Artist_Name'] : '' ?>"><br>
-                <label for="status">Status</label><br>
-                <select name="status">
-                    <option value="private" <?= isset($_GET['id']) && $edit[0]['status']=='private' ? 'selected' : '' ?>>Private</option>
-                    <option value="public" <?= isset($_GET['id']) && $edit[0]['status']=='public' ? 'selected' : '' ?>>Public</option>
-                </select>
+                <input type="text" name="Artist_Name" placeholder="Enter Your artist Name" value="<?= isset($_GET['id']) ? $edit[0]['Artist_Name'] : '' ?>" required><br>
                 <label for="image">Image</label><br>
-                <input type="file" name="image" id="image"><br>
+                <input type="file" name="image" id="image" ><br>
                 <button name="addArtist">Submit</button>
             </form>
         </div>
-    <?php 
-        if (isset($_POST['addArtist'])) {
-            unset($_POST['addArtist']);
-            if (isset($_POST['Artist_ID'])) {
-                if ($query->edit("artists", "Artist_ID", $_GET['id'], $_POST,"../assets/artists")) {
-                    echo "edited";
-                } 
-            } else {
-                if ($query->insert("artists", $_POST, "../assets/artists")) {
-                    echo "inserted";
-                } 
-            }
-        }
-    ?>
     </div>
 </div>
 <script src="../js/adminPopup.js"></script>

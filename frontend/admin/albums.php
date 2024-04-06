@@ -2,6 +2,18 @@
     include('header.php');
     $sql= 'SELECT albums.* , artists.Artist_Name, artists.Image FROM albums INNER JOIN artists ON albums.Artist_ID=artists.Artist_ID';
     $albums =$query->displayJoin($sql);
+    if (isset($_POST['addalbum'])) {
+        unset($_POST['addalbum']);
+        if (isset($_POST['Album_ID'])) {
+            if ($query->edit("albums", "Album_ID", $_GET['id'], $_POST,"")) {
+                header("location:albums.php");
+            } 
+        } else {
+            if ($query->insert("albums", $_POST, "")) {
+                header("location:albums.php");
+            } 
+        }
+    }
 ?>
 <div class="container">
     <?php include('adminSidebar.php') ?>  
@@ -117,7 +129,7 @@
                     
                 <?php } ?>
                 <label for="title">Album Name</label><br>
-                <input type="text" name="Title" placeholder="Enter Your album Name" value="<?= isset($_GET['id']) ? $edit[0]['Title'] : '' ?>"><br>
+                <input type="text" name="Title" placeholder="Enter Your album Name" value="<?= isset($_GET['id']) ? $edit[0]['Title'] : '' ?>" required><br>
                 <label for="status">Artist</label><br>
                 <select name="Artist_ID">
                     <?php 
@@ -130,20 +142,6 @@
                 <button name="addalbum">Submit</button>
             </form>
         </div>
-    <?php 
-        if (isset($_POST['addalbum'])) {
-            unset($_POST['addalbum']);
-            if (isset($_POST['Album_ID'])) {
-                if ($query->edit("albums", "Album_ID", $_GET['id'], $_POST,"")) {
-                    echo "edited";
-                } 
-            } else {
-                if ($query->insert("albums", $_POST, "")) {
-                    echo "inserted";
-                } 
-            }
-        }
-    ?>
     </div>
 </div>
 <script src="../js/adminPopup.js"></script>

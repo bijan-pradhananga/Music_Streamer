@@ -5,6 +5,18 @@ $sql = "SELECT Songs.Song_ID,Songs.Title AS SongTitle, Artists.Artist_Name AS Ar
     JOIN Albums ON Songs.Album_ID = Albums.Album_ID 
     JOIN Genres ON Songs.Genre_ID = Genres.Genre_ID";
 $songs = $query->displayJoin($sql);
+if (isset($_POST['addsong'])) {
+    unset($_POST['addsong']);
+    if (isset($_POST['Song_ID'])) {
+        if ($query->edit("songs", "Song_ID", $_GET['id'], $_POST,"../assets/songs")) {
+            header("songs.php");
+        } 
+    } else {
+        if ($query->insert("songs", $_POST, "../assets/songs")) {
+            header("songs.php");
+        } 
+    }
+}
 ?>
 <div class="container">
     <?php include('adminSidebar.php') ?>
@@ -163,18 +175,7 @@ $songs = $query->displayJoin($sql);
             </form>
         </div>
     <?php 
-        if (isset($_POST['addsong'])) {
-            unset($_POST['addsong']);
-            if (isset($_POST['Song_ID'])) {
-                if ($query->edit("songs", "Song_ID", $_GET['id'], $_POST,"../assets/songs")) {
-                    echo "edited";
-                } 
-            } else {
-                if ($query->insert("songs", $_POST, "../assets/songs")) {
-                    echo "inserted";
-                } 
-            }
-        }
+
     ?>
     </div>
 </div>

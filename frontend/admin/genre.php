@@ -1,6 +1,18 @@
 <?php 
     include('header.php');
     $genres = $query->display("genres");
+    if (isset($_POST['addGenre'])) {
+        unset($_POST['addGenre']);
+        if (isset($_POST['Genre_ID'])) {
+            if ($query->edit("genres", "Genre_ID", $_GET['id'], $_POST,"../assets/genres")) {
+                header("location:genre.php");
+            } 
+        } else {
+            if ($query->insert("genres", $_POST, "../assets/genres")) {
+                header("location:genre.php");
+            } 
+        }
+    }
 ?>
 
 <div class="container">
@@ -130,20 +142,6 @@
                 <button name="addGenre">Submit</button>
             </form>
         </div>
-        <?php 
-        if (isset($_POST['addGenre'])) {
-            unset($_POST['addGenre']);
-            if (isset($_POST['Genre_ID'])) {
-                if ($query->edit("genres", "Genre_ID", $_GET['id'], $_POST,"../assets/genres")) {
-                    echo "edited";
-                } 
-            } else {
-                if ($query->insert("genres", $_POST, "../assets/genres")) {
-                    echo "inserted";
-                } 
-            }
-        }
-    ?>
     </div>
 </div>
 <script src="../js/adminPopup.js"></script>

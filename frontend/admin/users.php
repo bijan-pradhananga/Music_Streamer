@@ -1,6 +1,18 @@
 <?php 
 include('header.php');
 $users = $query->display("users");
+if (isset($_POST['adduser'])) {
+    unset($_POST['adduser']);
+    if (isset($_POST['User_ID'])) {
+        if ($query->edit("users", "User_ID", $_GET['id'], $_POST,"../uploads")) {
+            header("users.php");
+        } 
+    } else {
+        if ($query->insert("users", $_POST, "../uploads")) {
+            header("users.php");
+        } 
+    }
+}
 ?>
 
 <div class="container">
@@ -147,20 +159,6 @@ $users = $query->display("users");
                 <button name="adduser">Submit</button>
             </form>
         </div>
-    <?php 
-        if (isset($_POST['adduser'])) {
-            unset($_POST['adduser']);
-            if (isset($_POST['User_ID'])) {
-                if ($query->edit("users", "User_ID", $_GET['id'], $_POST,"../uploads")) {
-                    echo "edited";
-                } 
-            } else {
-                if ($query->insert("users", $_POST, "../uploads")) {
-                    echo "inserted";
-                } 
-            }
-        }
-    ?>
     </div>
 </div>
 <script src="../js/adminPopup.js"></script>

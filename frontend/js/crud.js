@@ -338,6 +338,7 @@ function createAlbum() {
     .then(data => {
         if (data.includes('success')) {
             alert('album created');
+            getAlbums();
         }else{
             console.log('error making album');
         }

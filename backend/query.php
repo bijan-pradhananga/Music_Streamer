@@ -138,7 +138,7 @@ class dbQuery extends Database
             $audio = $user[0]['Title'].'.mp3';
             $this->deleteImg($audio, $loc);
             $this->insertAudio($_POST['Title'],$loc);
-            
+
         }
         $sql = "UPDATE $table SET $dataString  WHERE $id = $idVal";
         $result = $this->conn->query($sql);

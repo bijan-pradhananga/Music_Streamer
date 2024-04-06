@@ -243,7 +243,7 @@ $artists = $query->display("artists");
                         </div>
                     </form>
                     <?php if ($query->checkArtist($_SESSION['id'])) {
-                        $artist = $query->fetchData("artists", "Artist_ID", $_SESSION['id']);
+                        $artist = $query->fetchData("artists", "User_ID", $_SESSION['id']);
                     ?>
                         <div class="content-header" style="z-index: 10;">
                             <h1>Artist Profile</h1>
@@ -272,10 +272,6 @@ $artists = $query->display("artists");
                                     <label for="Artist_Name">Artist Name</label><br>
                                     <input type="text" name="Artist_Name" value="<?= $artist[0]['Artist_Name'] ?>"> <br>
                                     <label for="status">Status</label><br>
-                                    <select name="status">
-                                        <option value="private" <?php if ($artist[0]['status'] == 'private') echo 'selected'  ?>>Private</option>
-                                        <option value="public" <?php if ($artist[0]['status'] == 'public') echo 'selected' ?>>Public</option>
-                                    </select> <br>
                                     <button>Save Changes</button>
                                 </div>
                             </div>
@@ -332,7 +328,7 @@ $artists = $query->display("artists");
                 <h2>Create a playlist</h2>
                 <form id="playlistForm" action="" method="post">
                     <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
-                    <input type="text" name="Playlist_Name" placeholder="Enter your playlist name">
+                    <input type="text" name="Playlist_Name" placeholder="Enter your playlist name" required>
                     <button id="playlistFormBtn">Create</button>
                 </form>
                 <p>What's your soundtrack today? Create a playlist and find out!</p>
@@ -363,7 +359,7 @@ $artists = $query->display("artists");
                         <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
                         <input type="hidden" name="Artist_ID" value="<?= $artistId ?>">
                         Title <br>
-                        <input type="text" name="Title" placeholder="Enter your song title"> <br>
+                        <input type="text" name="Title" placeholder="Enter your song title" required> <br>
                         Genre <br>
                         <select name="Genre_ID">
                             <?php foreach ($genres as $genre) : ?>
@@ -375,8 +371,13 @@ $artists = $query->display("artists");
                         <select name="Album_ID" id="albumOptions">
 
                         </select>
+                        <label for="status">Status</label><br>
+                        <select name="status" id="">
+                            <option value="private" selected>Private</option>
+                            <option value="public">public</option>
+                        </select><br>
                         Song <br>
-                        <input type="file" name="audio">
+                        <input type="file" name="audio" required>
                         <br>
                         <button>Upload</button>
                     </form>
@@ -384,15 +385,10 @@ $artists = $query->display("artists");
                     <form id="registerArtistForm" method="post" enctype="multipart/form-data">
                         <h2>Register as artist</h2>
                         <label for="Artist_Name">Name</label><br>
-                        <input type="text" name="Artist_Name" placeholder="Enter Your Artist Name"><br>
+                        <input type="text" name="Artist_Name" placeholder="Enter Your Artist Name" required><br>
                         <label for="image">Image</label><br>
-                        <input type="file" name="image" id="image"><br>
+                        <input type="file" name="image" id="image" required><br>
                         <input type="hidden" name="User_ID" value="<?= $_SESSION['id'] ?>">
-                        <label for="status">Status</label><br>
-                        <select name="status" id="">
-                            <option value="private" selected>Private</option>
-                            <option value="public">public</option>
-                        </select><br>
                         <button>Submit</button>
                     </form>
                 <?php } ?>

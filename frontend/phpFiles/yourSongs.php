@@ -2,10 +2,10 @@
 include('../../backend/query.php');
 $query = new dbQuery;
 $query->sessionCheck();
-$sql = "SELECT Songs.Song_ID,Songs.User_ID,Songs.Title AS SongTitle, Artists.Artist_Name AS ArtistName, Albums.Title AS AlbumTitle, Genres.Genre_Name AS GenreName, Artists.Image AS ArtistImage
+$sql = "SELECT Songs.Song_ID,Songs.Title AS SongTitle, Artists.Artist_Name AS ArtistName, Albums.Title AS AlbumTitle, Genres.Genre_Name AS GenreName, Artists.Image AS ArtistImage
             FROM Songs JOIN Artists ON Songs.Artist_ID = Artists.Artist_ID 
             JOIN Albums ON Songs.Album_ID = Albums.Album_ID 
-            JOIN Genres ON Songs.Genre_ID = Genres.Genre_ID WHERE Songs.User_ID = " . $_SESSION['id'];
+            JOIN Genres ON Songs.Genre_ID = Genres.Genre_ID WHERE Artists.User_ID = " . $_SESSION['id'];
 $songs = $query->displayJoin($sql);
 $i = 0;
     if (!empty($songs)) {

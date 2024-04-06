@@ -112,6 +112,7 @@ $artists = $query->display("artists");
 
                         </tbody>
                     </table>
+                    <div id='error-msg' style="display: none;"> No Songs Found </div>
                 </div>
                 <div id="search-content" class="content-part" style="display: none;">
                     <table width="100%" cellpadding="25px" style="text-align:center; font-size:18px;">

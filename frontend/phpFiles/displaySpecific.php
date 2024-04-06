@@ -13,6 +13,7 @@
         WHERE Artists.Artist_Name LIKE '%$textData%' OR Genres.Genre_Name LIKE '%$textData%'";
         $songs = $query->displayJoin($sql);
         $i = 0;
+        if (!empty($songs)) {
         foreach ($songs as $song) {
             // this is a dynamic element so i added an onclick function again so the event can be delegated
             $likeDislikeStyle = $query->checkLikeDislike($song['Song_ID'], $_SESSION['id']) ? "color: #284edb;" : "color:white;";
@@ -34,9 +35,9 @@
             </td>
             </tr>
 <?php
-        }
-    } else {
-        // Handle the request method if needed
-        echo "Invalid request method";
+        }}
+    else {
+       echo "No_Songs_Found";
     }
+}
 ?>

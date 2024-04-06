@@ -57,13 +57,21 @@ boxContents.forEach(box => {
                 return response.text();
             })
             .then(function (data) {
-                document.getElementById('home-content').querySelector('table tbody').innerHTML = data;
+                if (data.includes('No_Songs_Found')) {
+                    document.getElementById('home-content').querySelector('#error-msg').style.display = 'block';
+                    document.getElementById('home-content').querySelector('table tbody').innerHTML = '';
+                }else{
+                    document.getElementById('home-content').querySelector('#error-msg').style.display = 'none';
+                    document.getElementById('home-content').querySelector('table tbody').innerHTML = data;
+                }   
             })
             .catch(function (error) {
                 console.log(error);
             });
     })
 })
+
+
 
 //function to display liked songs
 const likedSongsDisplay = () => {

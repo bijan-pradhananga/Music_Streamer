@@ -209,7 +209,7 @@ $artists = $query->display("artists");
                     <div class="content-header" style="z-index: 10;">
                         <h1>Your Profile</h1>
                     </div>
-                    <form id="profileEditForm" class="editForm" action="" method="post" enctype="multipart/form-data">
+                    <form id="profileEditForm" class="editForm"  method="post" enctype="multipart/form-data">
                         <div class="edit_profile-form">
                             <div class="edit_profile-img-part">
                                 <label for="Image">

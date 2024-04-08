@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <div class="content-part">
-            <img src="../assets/images/logo/loginLogo2.png">
+            <img src="../assets/adminImgs/adminPg.png">
         </div>
 
         <div class="login-part">

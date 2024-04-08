@@ -16,7 +16,7 @@ class dbQuery extends Database
     {
         $audio = $title . ".mp3"; // Use the title as the filename
         $tmp = $_FILES['audio']['tmp_name'];
-        $path = $loc.'/';
+        $path = $loc . '/';
         move_uploaded_file($tmp, $path . $audio);
     }
 
@@ -24,6 +24,11 @@ class dbQuery extends Database
     function insert($table, $tableData, $loc)
     {
         $key = implode(",", array_keys($tableData));
+        // Check if password field exists in $tableData
+        if (array_key_exists('password', $tableData)) {
+            // Hash the password using MD5
+            $tableData['password'] = md5($tableData['password']);
+        }
         $values = implode("','", array_values($tableData));
         // If there is an image in the form
         if (isset($_FILES['image']) && $loc != '' && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
@@ -35,7 +40,7 @@ class dbQuery extends Database
         // If there is an audio file in the form
         if (isset($_FILES['audio']) && $_FILES['audio']['error'] == UPLOAD_ERR_OK) {
             // Pass the title from the form to the insertAudio function
-            $this->insertAudio($_POST['Title'],$loc);
+            $this->insertAudio($_POST['Title'], $loc);
         }
         $sql = "INSERT INTO $table ($key) VALUES ('$values')";
         $result = $this->conn->query($sql);
@@ -84,12 +89,12 @@ class dbQuery extends Database
         }
     }
 
-    function deleteImg($imageFile,$loc)
+    function deleteImg($imageFile, $loc)
     {
-        unlink($loc."/" . $imageFile);
+        unlink($loc . "/" . $imageFile);
     }
 
-    function fetchData($table, $id,$idVal)
+    function fetchData($table, $id, $idVal)
     {
         $sql = "SELECT * FROM $table WHERE $id = $idVal";
         $result = $this->conn->query($sql);
@@ -102,7 +107,7 @@ class dbQuery extends Database
     }
 
 
-    function edit($table, $id, $idVal, $tableData,$loc)
+    function edit($table, $id, $idVal, $tableData, $loc)
     {
         $keys = array_keys($tableData);
         $values = array_values($tableData);
@@ -113,8 +118,8 @@ class dbQuery extends Database
         $dataString = implode(',', $data); // it gives result -> name='$name' ,age='$age' ,address='$address'
         // If there is an image in the form
         if (isset($_FILES['image']) && $loc != '' && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-            $dataString .= ",Image='".$_FILES['image']['name']."'";
-            $user = $this->fetchData($table,$id,$idVal);
+            $dataString .= ",Image='" . $_FILES['image']['name'] . "'";
+            $user = $this->fetchData($table, $id, $idVal);
             $userImg = $user[0]['Image'];
             // Call the insertImg function to handle image upload
             $this->insertImg($_FILES['image']['name'], $loc);
@@ -122,29 +127,28 @@ class dbQuery extends Database
         }
         // If there is a title and Song_ID
         if (isset($_POST['Song_ID']) && !isset($_FILES['audio'])) {
-        $user = $this->fetchData($table, $id, $idVal);
-        $audio = $user[0]['Title'];
-        // Check if the title is different from the previous title
-        if ($_POST['Title'] !== $user[0]['Title']) {
-            $filePath = '../assets/songs/' . $audio . '.mp3';
-            $newFilePath = '../assets/songs/' . $_POST['Title'] . '.mp3';
-            rename($filePath, $newFilePath);
-        }
+            $user = $this->fetchData($table, $id, $idVal);
+            $audio = $user[0]['Title'];
+            // Check if the title is different from the previous title
+            if ($_POST['Title'] !== $user[0]['Title']) {
+                $filePath = '../assets/songs/' . $audio . '.mp3';
+                $newFilePath = '../assets/songs/' . $_POST['Title'] . '.mp3';
+                rename($filePath, $newFilePath);
+            }
         }
         // If there is an audio file in the form
-        if (isset($_FILES['audio']) && $loc != ''&& $_FILES['audio']['error'] == UPLOAD_ERR_OK) {
+        if (isset($_FILES['audio']) && $loc != '' && $_FILES['audio']['error'] == UPLOAD_ERR_OK) {
             // Pass the title from the form to the insertAudio function
-            $user = $this->fetchData($table,$id,$idVal);
-            $audio = $user[0]['Title'].'.mp3';
+            $user = $this->fetchData($table, $id, $idVal);
+            $audio = $user[0]['Title'] . '.mp3';
             $this->deleteImg($audio, $loc);
-            $this->insertAudio($_POST['Title'],$loc);
-
+            $this->insertAudio($_POST['Title'], $loc);
         }
         $sql = "UPDATE $table SET $dataString  WHERE $id = $idVal";
         $result = $this->conn->query($sql);
         if ($result) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -169,7 +173,8 @@ class dbQuery extends Database
         }
     }
 
-    function searchf($table,$searchType,$value){
+    function searchf($table, $searchType, $value)
+    {
         $sql = "SELECT * FROM $table WHERE $searchType LIKE '%$value%'";
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
@@ -180,7 +185,8 @@ class dbQuery extends Database
         }
     }
 
-    function countRows($table){
+    function countRows($table)
+    {
         $sql = "SELECT * FROM $table";
         $result = $this->conn->query($sql);
         return $result->num_rows;
@@ -189,7 +195,7 @@ class dbQuery extends Database
 
     function login($table, $email, $password)
     {
-        // $password= md5($password); 
+        $password= md5($password); 
         $sql = "SELECT * FROM $table WHERE email = '$email' AND password='$password'";
         $result = $this->conn->query($sql);
         $findData = $result->num_rows;
@@ -202,7 +208,7 @@ class dbQuery extends Database
             header("location:index.php");
         } else {
             // $_SESSION['error']="invalid email and password";
-            echo '<div>invalid email or password</div>';
+            echo '<div style="color:red; margin-top:10px;">invalid email or password</div>';
         }
     }
 

@@ -30,10 +30,10 @@
             <div class="login-form">
                 <form action="" method="post">
                     <label for="email">Email:</label><br>
-                    <input type="email" name="email" id="email"><br>
+                    <input type="email" name="email" id="email" required><br>
                     <label for="password">Password:</label><br>
                     <div>
-                        <input type="password" name="password" id="password"> <br>
+                        <input type="password" name="password" id="password" required> <br>
                     </div>
                     <button>Login</button>
                     <?php

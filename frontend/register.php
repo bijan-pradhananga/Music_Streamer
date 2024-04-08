@@ -63,18 +63,17 @@ $query = new dbQuery;
                         <a style="color: red; "></a>
                     </div>
                     </label>
-                    <?php 
-                        if (!empty($_POST)) {
-                            unset($_POST['reenter_password']);
-                            if ($query->insert("users",$_POST,'uploads')) {
-                                echo "<div style='font-weight:bold;'>Registered Successfully </div>";
-                            } 
-                        }
-                    ?>
-
                     <button>Sign Up</button>
                 </form>
             </div>
+            <?php 
+                        if (!empty($_POST)) {
+                            unset($_POST['reenter_password']);
+                            if ($query->insert("users",$_POST,'uploads')) {
+                                echo "<div style='font-weight:bold; margin-top:1vh;'>Registered Successfully </div>";
+                            } 
+                        }
+                    ?>
             <div class="signup-part">
                 <p>Already have an account?</p>
                 <a href="login.php">Sign In</a>

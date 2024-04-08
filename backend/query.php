@@ -124,47 +124,47 @@ class dbQuery extends Database
                 echo "same";
             }
         }
-        // $values = array_values($tableData);
-        // $data = [];
-        // for ($i = 0; $i < count($keys); $i++) {
-        //     $data[] = "{$keys[$i]}='{$values[$i]}' ";
-        // }
-        // $dataString = implode(',', $data); // it gives result -> name='$name' ,age='$age' ,address='$address'
-        // // If there is an image in the form
-        // if (isset($_FILES['image']) && $loc != '' && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-        //     $dataString .= ",Image='" . $_FILES['image']['name'] . "'";
-        //     $user = $this->fetchData($table, $id, $idVal);
-        //     $userImg = $user[0]['Image'];
-        //     // Call the insertImg function to handle image upload
-        //     $this->insertImg($_FILES['image']['name'], $loc);
-        //     $this->deleteImg($userImg, $loc);
-        // }
-        // // If there is a title and Song_ID
-        // if (isset($_POST['Song_ID']) && !isset($_FILES['audio'])) {
-        //     $user = $this->fetchData($table, $id, $idVal);
-        //     $audio = $user[0]['Title'];
-        //     // Check if the title is different from the previous title
-        //     if ($_POST['Title'] !== $user[0]['Title']) {
-        //         $filePath = '../assets/songs/' . $audio . '.mp3';
-        //         $newFilePath = '../assets/songs/' . $_POST['Title'] . '.mp3';
-        //         rename($filePath, $newFilePath);
-        //     }
-        // }
-        // // If there is an audio file in the form
-        // if (isset($_FILES['audio']) && $loc != '' && $_FILES['audio']['error'] == UPLOAD_ERR_OK) {
-        //     // Pass the title from the form to the insertAudio function
-        //     $user = $this->fetchData($table, $id, $idVal);
-        //     $audio = $user[0]['Title'] . '.mp3';
-        //     $this->deleteImg($audio, $loc);
-        //     $this->insertAudio($_POST['Title'], $loc);
-        // }
-        // $sql = "UPDATE $table SET $dataString  WHERE $id = $idVal";
-        // $result = $this->conn->query($sql);
-        // if ($result) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+        $values = array_values($tableData);
+        $data = [];
+        for ($i = 0; $i < count($keys); $i++) {
+            $data[] = "{$keys[$i]}='{$values[$i]}' ";
+        }
+        $dataString = implode(',', $data); // it gives result -> name='$name' ,age='$age' ,address='$address'
+        // If there is an image in the form
+        if (isset($_FILES['image']) && $loc != '' && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+            $dataString .= ",Image='" . $_FILES['image']['name'] . "'";
+            $user = $this->fetchData($table, $id, $idVal);
+            $userImg = $user[0]['Image'];
+            // Call the insertImg function to handle image upload
+            $this->insertImg($_FILES['image']['name'], $loc);
+            $this->deleteImg($userImg, $loc);
+        }
+        // If there is a title and Song_ID
+        if (isset($_POST['Song_ID']) && !isset($_FILES['audio'])) {
+            $user = $this->fetchData($table, $id, $idVal);
+            $audio = $user[0]['Title'];
+            // Check if the title is different from the previous title
+            if ($_POST['Title'] !== $user[0]['Title']) {
+                $filePath = '../assets/songs/' . $audio . '.mp3';
+                $newFilePath = '../assets/songs/' . $_POST['Title'] . '.mp3';
+                rename($filePath, $newFilePath);
+            }
+        }
+        // If there is an audio file in the form
+        if (isset($_FILES['audio']) && $loc != '' && $_FILES['audio']['error'] == UPLOAD_ERR_OK) {
+            // Pass the title from the form to the insertAudio function
+            $user = $this->fetchData($table, $id, $idVal);
+            $audio = $user[0]['Title'] . '.mp3';
+            $this->deleteImg($audio, $loc);
+            $this->insertAudio($_POST['Title'], $loc);
+        }
+        $sql = "UPDATE $table SET $dataString  WHERE $id = $idVal";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function search($searchData)

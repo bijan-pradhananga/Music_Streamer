@@ -66,7 +66,9 @@ $query = new dbQuery;
                     <?php 
                         if (!empty($_POST)) {
                             unset($_POST['reenter_password']);
-                            $query->insert("users",$_POST,'uploads');
+                            if ($query->insert("users",$_POST,'uploads')) {
+                                echo "<div style='font-weight:bold;'>Registered Successfully </div>";
+                            } 
                         }
                     ?>
 

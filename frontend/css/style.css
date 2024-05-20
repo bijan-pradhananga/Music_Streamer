@@ -397,6 +397,20 @@ td .fa-trash:hover{
     display: block;
 }
 
+.premium-btn{
+    padding: 10px;
+    background-color: #284edb;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+.premium-btn:hover{
+    background-color: #0c38d6;
+    color: white;
+}
+
 /* styling the genre box */
 .genre-box .box-content{
     position: relative;

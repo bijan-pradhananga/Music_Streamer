@@ -334,6 +334,22 @@ if (document.getElementById('editArtistProfile')) {
     })
 }
 
+//to buy premium
+if (document.getElementById('premiumBtn')) {
+    document.getElementById('premiumBtn').addEventListener('click',(event)=>{
+        fetch('phpFiles/buyPremium.php')
+        .then(response => response.json())
+        .then(data => {
+        if (data.status === 'success') {
+            alert('Premium Bought')
+            window.location.reload();
+        } else {
+            // Handle error scenario if needed
+            alert('Error Occured');
+        }
+        })
+    })
+}
 
 //to create an album
 function createAlbum() {

@@ -64,8 +64,17 @@ $artists = $query->display("artists");
                         </div>
                     </div>
                 </div>
-                <div class="profile" id="edit_profile-section" title="edit_profile-content" onclick="openDiv(this)">
-                    <img src="uploads/<?= $user[0]['Image'] ?>" alt="profile">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <?php 
+                        if ($user[0]['premium'] != '1' ):
+                    ?>
+                    <button class="premium-btn" id="premiumBtn">
+                        Buy premium
+                    </button>
+                    <?php endif; ?>
+                    <div class="profile" id="edit_profile-section" title="edit_profile-content" onclick="openDiv(this)">
+                        <img src="uploads/<?= $user[0]['Image'] ?>" alt="profile">
+                    </div>
                 </div>
             </div>
             <div class="main-content" style="color:white;">

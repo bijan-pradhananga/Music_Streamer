@@ -296,9 +296,19 @@ class dbQuery extends Database
 
     function checkPlaylistSong($songId, $playlistId)
     {
-        $sql = "SELECT * FROM playlist_songs WHERE Playlist_ID=$songId AND Song_ID = $songId";
+        $sql = "SELECT * FROM playlist_songs WHERE Playlist_ID=$playlistId AND Song_ID = $songId";
         $result = $this->conn->query($sql);
         if ($result && $result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function buyPremium($id){
+        $sql = "UPDATE users SET premium='1' WHERE User_ID=$id";
+        $result = $this->conn->query($sql);
+        if ($result) {
             return true;
         } else {
             return false;
